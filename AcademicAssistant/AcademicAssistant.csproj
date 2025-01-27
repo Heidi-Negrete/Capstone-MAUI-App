@@ -67,4 +67,10 @@
 	  <ProjectReference Include="..\AcademicAssistant.Core\AcademicAssistant.Core.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Update="Views\SettingsPage.xaml.cs">
+	    <DependentUpon>SettingsPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
 </Project>
