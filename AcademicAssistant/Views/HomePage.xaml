@@ -6,15 +6,54 @@
              Title="Home">
 
     <ScrollView>
-        <VerticalStackLayout>
-            <Label Text="{Binding Title, Mode=OneTime}"
-                   FontSize="Large"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"
-                   Margin="0,20,0,0"/>
-        </VerticalStackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition/>
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Header -->
+            <Image Grid.Row="0"
+                   Grid.Column="0"
+                   Source="owl.png"
+                   HeightRequest="50"
+                   WidthRequest="50"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center"/>
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="100,0,100,0"
+                Text="{Binding StudentName, Mode=TwoWay}"
+                FontSize="24"
+                HorizontalOptions="Start"
+                VerticalOptions="Center"/>
+            <ImageButton
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="0,0,20,0"
+                Source="bell_notification.png"
+                HeightRequest="48"
+                WidthRequest="48"
+                VerticalOptions="Center"
+                HorizontalOptions="End"/>
+
+            <BoxView Grid.Row="1"
+                     Grid.Column="0"
+                     Color="{StaticResource aaLightAccent}"/>
+
+            <!-- Main Content -->
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Text="{Binding Title, Mode=OneTime}"
+                Style="{StaticResource Headline}"/>
+        </Grid>
     </ScrollView>
-
-
 
 </ContentPage>

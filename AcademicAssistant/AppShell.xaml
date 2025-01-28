@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:AcademicAssistant"
     xmlns:views="clr-namespace:AcademicAssistant.Views"
     Title="Academic Assistant"
-    BackgroundColor="White">
+    FlyoutBackground="{StaticResource aaBackgroundBrush}">
 
     <FlyoutItem Title="Home"
                 Icon="home.png">
@@ -25,5 +25,20 @@
                 Route="settings"/>
         </Tab>
     </FlyoutItem>
+
+    <Shell.TitleView>
+        <Grid WidthRequest="{Binding Source={RelativeSource Self},Path=Window.Width}"
+              BackgroundColor="{StaticResource aaDarkAccent}">
+            <Label
+                x:Name="pageTitle"
+                FontFamily="OpenSansBold"
+                FontSize="20"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Margin="0,0,0,0"
+                BackgroundColor="{StaticResource aaDarkAccent}"
+                TextColor="{StaticResource aaLightAccent}"/>
+        </Grid>
+    </Shell.TitleView>
 
 </Shell>

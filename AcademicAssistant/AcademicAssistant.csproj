@@ -47,7 +47,11 @@
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
-		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+		<MauiImage Update="Resources\Images\bell_notification.svg" Resize="True" BaseSize="48,48" />
+        <MauiImage Update="Resources\Images\bell.svg" Resize="True" BaseSize="48,48" />
+        <MauiImage Update="Resources\Images\settings.svg" Resize="True" BaseSize="48,48" />
+        <MauiImage Update="Resources\Images\home.svg" Resize="True" BaseSize="48,48" />
+        <MauiImage Update="Resources\Images\owl.svg" Resize="True" BaseSize="72,72" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />

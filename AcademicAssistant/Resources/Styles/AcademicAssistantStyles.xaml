@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xaml-comp compile="true" ?>
+
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="AcademicAssistant.Resources.Styles.AcademicAssistantStyles">
+
+    <!-- COLORS -->
+
+    <Color x:Key="aaDarkAccent">#002f51</Color>
+    <Color x:Key="aaLightAccent">#4DABFE</Color>
+    <Color x:Key="aaAccentPositive">#46a35e</Color>
+    <Color x:Key="aaAccentWarning">#fb8a00</Color>
+    <Color x:Key="aaFontMain">#011b32</Color>
+    <Color x:Key="aaFontAlt">#333</Color>
+    <Color x:Key="aaBackground">#ffffff</Color>
+
+    <SolidColorBrush x:Key="aaDarkAccentBrush"
+                     Color="{StaticResource aaDarkAccent}"/>
+    <SolidColorBrush x:Key="aaLightAccentBrush"
+                     Color="{StaticResource aaLightAccent}"/>
+    <SolidColorBrush x:Key="aaAccentPositiveBrush"
+                     Color="{StaticResource aaAccentPositive}"/>
+    <SolidColorBrush x:Key="aaAccentWarningBrush"
+                     Color="{StaticResource aaAccentWarning}"/>
+    <SolidColorBrush x:Key="aaBackgroundBrush"
+                     Color="{StaticResource aaBackground}"/>
+
+    <!-- MAIN STYLES -->
+
+    <Style TargetType="Page"
+           ApplyToDerivedTypes="True">
+        <Setter Property="Padding"
+                Value="0"/>
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource aaBackground}"/>
+    </Style>
+
+    <Style TargetType="Shell"
+           ApplyToDerivedTypes="True">
+        <Setter Property="Shell.BackgroundColor"
+                Value="{StaticResource aaBackground}"/>
+        <Setter Property="Shell.ForegroundColor"
+                Value="{StaticResource aaLightAccent}"/>
+        <Setter Property="Shell.TitleColor"
+                Value="{StaticResource aaDarkAccent}"/>
+        <Setter Property="Shell.DisabledColor"
+                Value="{StaticResource aaFontAlt}"/>
+        <Setter Property="Shell.UnselectedColor"
+                Value="{StaticResource aaFontAlt}"/>
+        <Setter Property="Shell.NavBarHasShadow"
+                Value="False"/>
+        <Setter Property="Shell.TabBarBackgroundColor"
+                Value="{StaticResource aaBackground}"/>
+        <Setter Property="Shell.TabBarForegroundColor"
+                Value="{StaticResource aaLightAccent}"/>
+        <Setter Property="Shell.TabBarTitleColor"
+                Value="{StaticResource aaDarkAccent}"/>
+        <Setter Property="Shell.TabBarUnselectedColor"
+                Value="{StaticResource aaFontAlt}"/>
+    </Style>
+
+    <Style TargetType="NavigationPage">
+        <Setter Property="BarBackgroundColor"
+                Value="{StaticResource aaBackground}"/>
+        <Setter Property="BarTextColor"
+                Value="{StaticResource aaFontMain}"/>
+        <Setter Property="IconColor"
+                Value="{StaticResource aaFontAlt}"/>
+    </Style>
+
+    <Style TargetType="TabbedPage">
+        <Setter Property="BarBackgroundColor"
+                Value="{StaticResource aaBackground}"/>
+        <Setter Property="BarTextColor"
+                Value="{StaticResource aaFontMain}"/>
+        <Setter Property="UnselectedTabColor"
+                Value="{StaticResource aaDarkAccent}"/>
+        <Setter Property="SelectedTabColor"
+                Value="{StaticResource aaLightAccent}"/>
+    </Style>
+
+    <Style TargetType="Label">
+        <Setter Property="TextColor"
+                Value="{StaticResource aaFontMain}"/>
+        <Setter Property="BackgroundColor"
+                Value="Transparent"/>
+        <Setter Property="FontFamily"
+                Value="OpenSansRegular"/>
+        <Setter Property="FontSize"
+                Value="16"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal"/>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor"
+                                    Value="{StaticResource aaFontAlt}"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Label"
+           x:Key="Headline">
+        <Setter Property="TextColor"
+                Value="{StaticResource aaDarkAccent}"/>
+        <Setter Property="FontSize"
+                Value="32"/>
+        <Setter Property="HorizontalOptions"
+                Value="Center"/>
+        <Setter Property="HorizontalTextAlignment"
+                Value="Center"/>
+        <Setter Property="Margin"
+                Value="0,20,0,20"/>
+    </Style>
+
+    <Style TargetType="Label"
+           x:Key="SubHeadline">
+        <Setter Property="TextColor"
+                Value="{StaticResource aaDarkAccent}"/>
+        <Setter Property="FontSize"
+                Value="24"/>
+        <Setter Property="HorizontalOptions"
+                Value="Center"/>
+        <Setter Property="HorizontalTextAlignment"
+                Value="Center"/>
+        <Setter Property="Margin"
+                Value="0,14,0,14"/>
+    </Style>
+
+    <Style TargetType="ListView">
+        <Setter Property="SeparatorColor"
+                Value="{StaticResource aaFontMain}"/>
+        <Setter Property="RefreshControlColor"
+                Value="{StaticResource aaFontMain}"/>
+    </Style>
+
+    <Style TargetType="Border">
+        <Setter Property="Stroke"
+                Value="{StaticResource aaDarkAccent}"/>
+        <Setter Property="StrokeShape"
+                Value="Rectangle"/>
+        <Setter Property="StrokeThickness"
+                Value="1"/>
+    </Style>
+
+    <!-- STYLES FOR CONTROLS -->
+
+    <Style TargetType="Button">
+        <Setter Property="TextColor"
+                Value="{StaticResource aaBackground}"/>
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource aaDarkAccent}"/>
+        <Setter Property="FontFamily"
+                Value="OpenSansRegular"/>
+        <Setter Property="FontSize"
+                Value="16"/>
+        <Setter Property="BorderWidth"
+                Value="0"/>
+        <Setter Property="CornerRadius"
+                Value="8"/>
+        <Setter Property="Padding"
+                Value="14,10"/>
+        <Setter Property="MinimumHeightRequest"
+                Value="44"/>
+        <Setter Property="MinimumWidthRequest"
+                Value="44"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal"/>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor"
+                                    Value="{StaticResource aaFontMain}"/>
+                            <Setter Property="BackgroundColor"
+                                    Value="{StaticResource aaFontAlt}"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="PointerOver"/>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <Style TargetType="DatePicker">
+        <Setter Property="TextColor"
+                Value="{StaticResource aaFontMain}"/>
+        <Setter Property="BackgroundColor"
+                Value="Transparent"/>
+        <Setter Property="FontFamily"
+                Value="OpenSansRegular"/>
+        <Setter Property="FontSize"
+                Value="16"/>
+        <Setter Property="MinimumHeightRequest"
+                Value="44"/>
+        <Setter Property="MinimumWidthRequest"
+                Value="44"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal"/>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor"
+                                    Value="{StaticResource aaFontAlt}"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Picker">
+        <Setter Property="TextColor"
+                Value="{StaticResource aaFontMain}"/>
+        <Setter Property="TitleColor"
+                Value="{StaticResource aaDarkAccent}"/>
+        <Setter Property="BackgroundColor"
+                Value="Transparent"/>
+        <Setter Property="FontFamily"
+                Value="OpenSansRegular"/>
+        <Setter Property="FontSize"
+                Value="16"/>
+        <Setter Property="MinimumHeightRequest"
+                Value="44"/>
+        <Setter Property="MinimumWidthRequest"
+                Value="44"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal"/>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor"
+                                    Value="{StaticResource aaFontAlt}"/>
+                            <Setter Property="TitleColor"
+                                    Value="{StaticResource aaLightAccent}"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+
+
+</ResourceDictionary>

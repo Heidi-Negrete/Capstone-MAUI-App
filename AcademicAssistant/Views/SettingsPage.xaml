@@ -4,8 +4,10 @@
              x:Class="AcademicAssistant.Views.SettingsPage"
              Title="Settings">
     <VerticalStackLayout>
+        <Label Text="Settings"
+               Style="{StaticResource Headline}"/>
         <Label
-            Text="Change your notification cettings here!"
+            Text="Change your cettings here!"
             VerticalOptions="Center"
             HorizontalOptions="Center"/>
     </VerticalStackLayout>
