@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:vm="clr-namespace:AcademicAssistant.Core.ViewModels;assembly=AcademicAssistant.Core"
+             x:DataType="vm:HomeViewModel"
              x:Class="AcademicAssistant.Views.HomePage"
              Title="Home">
 
@@ -10,6 +12,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="75"/>
                 <RowDefinition Height="5"/>
+                <RowDefinition/>
                 <RowDefinition/>
 
             </Grid.RowDefinitions>
@@ -29,7 +32,7 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Margin="100,0,100,0"
-                Text="{Binding StudentName, Mode=TwoWay}"
+                Text="{Binding Student.Name}"
                 FontSize="24"
                 HorizontalOptions="Start"
                 VerticalOptions="Center"/>
@@ -51,8 +54,9 @@
             <Label
                 Grid.Row="2"
                 Grid.Column="0"
-                Text="{Binding Title, Mode=OneTime}"
+                Text="{Binding Title}"
                 Style="{StaticResource Headline}"/>
+            
         </Grid>
     </ScrollView>
 
