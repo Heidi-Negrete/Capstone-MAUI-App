@@ -1,0 +1,29 @@
+using AcademicAssistant.Repositories.Models;
+
+namespace AcademicAssistant.Repositories;
+
+public class HardCodedRepository : IRepository
+{
+    private Student _student; 
+
+    public HardCodedRepository()
+    {
+        _student = new Student
+        {
+            Id = 1,
+            Name = "John Doe",
+            Terms = new List<Term>()
+        };
+    }
+    
+    public Student GetStudent()
+    {
+        // return a new student with some hardcoded data
+        return _student;
+    }
+    
+    public void UpdateStudent(int id, Student student)
+    {
+        _student = student;
+    }
+}
