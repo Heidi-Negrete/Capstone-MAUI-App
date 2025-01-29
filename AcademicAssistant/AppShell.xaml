@@ -26,6 +26,7 @@
         </Tab>
     </FlyoutItem>
 
+    <!--- TitleView text is NOT displayed, only colored bar.  -->
     <Shell.TitleView>
         <Grid WidthRequest="{Binding Source={RelativeSource Self},Path=Window.Width}"
               BackgroundColor="{StaticResource aaDarkAccent}">
