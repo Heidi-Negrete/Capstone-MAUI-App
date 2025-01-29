@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using AcademicAssistant.Core.ViewModels;
+using AcademicAssistant.Repositories;
+using AcademicAssistant.Views;
+using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
 
 namespace AcademicAssistant;
@@ -20,6 +23,16 @@ public static class MauiProgram
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
+        // repository for dependency injection
+        builder.Services.AddSingleton<IRepository, HardCodedRepository>();
+        
+        // Views
+        builder.Services.AddSingleton<HomePage>();
+        builder.Services.AddSingleton<SettingsPage>();
+        
+        // ViewModels
+        builder.Services.AddSingleton<HomeViewModel>();
+        builder.Services.AddSingleton<SettingsViewModel>();
 
         return builder.Build();
     }
