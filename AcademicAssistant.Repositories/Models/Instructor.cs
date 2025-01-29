@@ -1,4 +1,4 @@
-namespace AcademicAssistant.Core.Models;
+namespace AcademicAssistant.Repositories.Models;
 
 public class Instructor
 {
