@@ -1,9 +1,17 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+
 namespace AcademicAssistant.Repositories.Models;
 
-public class Instructor
+public partial class Instructor : ObservableObject
 {
     public int Id { get; set; }
-    public string Name { get; set; }
-    public string Email { get; set; }
-    public string PhoneNumber { get; set; }
+
+    [ObservableProperty] 
+    private string _name;
+
+    [ObservableProperty]
+    private string _email;
+
+    [ObservableProperty]
+    private string _phoneNumber;
 }

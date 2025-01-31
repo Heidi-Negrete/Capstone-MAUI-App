@@ -1,18 +1,29 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+
 namespace AcademicAssistant.Repositories.Models;
 
-public class Course
+public partial class Course : ObservableObject
 {
     public int Id { get; set; }
-    public string Title { get; set; }
 
-    public DateTime StartDate { get; set; }
-    public DateTime EndDate { get; set; }
+    [ObservableProperty] 
+    private string _title;
 
-    public AcademicStatus.Status Status { get; set; }
+    [ObservableProperty] 
+    private DateTime _startDate;
 
-    public Instructor Instructor { get; set; }
+    [ObservableProperty]
+    private DateTime _endDate;
 
-    public string Notes { get; set; }
+    [ObservableProperty]
+    private AcademicStatus.Status _status;
 
+    [ObservableProperty]
+    private Instructor _instructor;
+
+    [ObservableProperty]
+    private string _notes;
+    
+    // TO DO OBSERVABLE COLLECTION
     public List<Assessment> Assessments { get; set; }
 }

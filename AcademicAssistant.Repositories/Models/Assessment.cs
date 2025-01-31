@@ -1,13 +1,20 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+
 namespace AcademicAssistant.Repositories.Models;
 
-public abstract class Assessment
+public abstract partial class Assessment : ObservableObject
 {
     public int Id { get; set; }
 
-    public string Title { get; set; }
+    [ObservableProperty]
+    private string _title;
 
-    public DateTime StartDate { get; set; }
-    public DateTime EndDate { get; set; }
+    [ObservableProperty]
+    private DateTime _startDate;
 
-    public AcademicStatus.Status Status { get; set; }
+    [ObservableProperty] 
+    private DateTime _endDate;
+
+    [ObservableProperty] 
+    private AcademicStatus.Status _status;
 }

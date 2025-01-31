@@ -1,16 +1,24 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+
 namespace AcademicAssistant.Repositories.Models;
 
-public class Term
+public partial class Term : ObservableObject
 {
     public int Id { get; set; }
 
-    public string Title { get; set; }
+    [ObservableProperty]
+    private string _title;
 
-    public DateTime StartDate { get; set; }
-    public DateTime EndDate { get; set; }
+    [ObservableProperty]
+    private DateTime _startDate;
+    
+    [ObservableProperty]
+    private DateTime _endDate;
+    
+    // TO DO OBSERVABLE COLLECTION
     public List<Course> Courses { get; private set; }
 
-    // maybe this should be in the UI layer
+    // extract to a manager?
     public void addCourse(Course course)
     {
         // User can only have 6 courses in a term
