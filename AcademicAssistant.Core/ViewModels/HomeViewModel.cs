@@ -5,7 +5,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace AcademicAssistant.Core.ViewModels;
 
-public class HomeViewModel: ObservableRecipient
+public partial class HomeViewModel: ObservableRecipient
 {
     private readonly IRepository _repository;
     
@@ -19,13 +19,15 @@ public class HomeViewModel: ObservableRecipient
         }
     }
     public string Title { get; set; } = "Academic Assistant";
-    
-    public ObservableCollection<Term> Terms { get; set; } = new();
+
+    [ObservableProperty]
+    private ObservableCollection<Term> _terms;
     
     public HomeViewModel(IRepository repository)
     {
         _repository = repository;
         Student = _repository.GetStudent();;
+        Terms = new ObservableCollection<Term>(Student.Terms);
     }
 
     public void LoadStudent()

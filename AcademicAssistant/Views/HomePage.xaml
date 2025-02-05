@@ -3,17 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:vm="clr-namespace:AcademicAssistant.Core.ViewModels;assembly=AcademicAssistant.Core"
+             xmlns:models="clr-namespace:AcademicAssistant.Repositories.Models;assembly=AcademicAssistant.Repositories"
              x:DataType="vm:HomeViewModel"
              x:Class="AcademicAssistant.Views.HomePage"
              Title="Home">
 
-    <ScrollView>
+    <VerticalStackLayout>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="75"/>
                 <RowDefinition Height="5"/>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="650"/>
+                <RowDefinition Height= "48"/>
 
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -51,13 +52,97 @@
                      Color="{StaticResource aaLightAccent}"/>
 
             <!-- Main Content -->
-            <Label
+            <!--<Label
                 Grid.Row="2"
                 Grid.Column="0"
                 Text="{Binding Title}"
-                Style="{StaticResource Headline}"/>
+                Style="{StaticResource Headline}"/>-->
+
+
+                <CollectionView Grid.Row="2" Grid.Column="0"
+                                x:Name="lvTerms"
+                                SelectionMode="Single"
+                                ItemsSource="{Binding Terms}" IsEnabled="True">
+                                
+                    <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Term" x:Key="SwipeViewTemplate">
+                        
+                        <SwipeView>
+
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItemView>
+                                        <HorizontalStackLayout BackgroundColor="Red">
+                                            <ImageButton Source="delete.png" Margin="10,0"></ImageButton>
+                                        </HorizontalStackLayout>
+                                    </SwipeItemView>
+                                    
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            
+                            <Grid Padding="0, 24,0, 24">
+                                
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="48"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Image Grid.Column="0"
+                                    Grid.Row="0"
+                                    Grid.RowSpan="2"
+                                    Source="term.png"
+                                   VerticalOptions="Center"
+                                    Margin="10,0,10,0"
+                                    ></Image>
+                            <Label Grid.Column="1"
+                                   Grid.Row="0"
+                                   Text="{Binding Title}"
+                                   Padding="10, 0"
+                                   VerticalOptions="End"
+                                   HorizontalOptions="Start"
+                                   TextColor="{StaticResource aaDarkAccent}"
+                                   FontSize="24"/>
+                            <Label Grid.Column="1"
+                                   Grid.Row="1"
+                                   Padding="10, 0, 0, 0"
+                                   Text="July 8 - August 8"
+                                   VerticalOptions="Start"
+                                   HorizontalOptions="Start"
+                                   FontSize="16"
+                                   TextColor="{StaticResource aaFontAlt}"/>
+                            <Label Grid.Column="2"
+                                   Grid.Row="0"
+                                   Grid.RowSpan="2"
+                                   Text="6 Courses"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="End"
+                                   FontSize="24"
+                                   Padding="0,0,10, 0"
+                                   TextColor="{StaticResource aaFontMain}"/>
+                            
+                            
+                        </Grid>
+                        </SwipeView> 
+                        
+                        
+                    </DataTemplate>
+                        
+                </CollectionView.ItemTemplate>
+            </CollectionView>
             
+            <VerticalStackLayout Grid.Row="3" Grid.ColumnSpan="3">
+                <Button  Text="Add Term" BackgroundColor="{StaticResource aaDarkAccent}" TextColor="{StaticResource aaBackground}" Margin="10, 10" VerticalOptions="End"></Button>
+            </VerticalStackLayout>
+
         </Grid>
-    </ScrollView>
+        
+        
+    </VerticalStackLayout>
 
 </ContentPage>

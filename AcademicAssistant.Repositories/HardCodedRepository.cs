@@ -12,7 +12,7 @@ public class HardCodedRepository : IRepository
         {
             Id = 1,
             Name = "John Doe",
-            Terms = new List<Term>()
+            Terms = new List<Term>() {new Term {Id = 1, Title = "Fall 2021"}, new Term {Id = 1, Title = "Slrjg 2021"}, new Term {Id = 1, Title = "dadfad1"}, new Term {Id = 1, Title = "dadfad1"}, new Term {Id = 1, Title = "dadfad1"}, new Term {Id = 1, Title = "dadfad1"}, new Term {Id = 1, Title = "dadfad1"}, new Term {Id = 1, Title = "dadfad1"}, new Term {Id = 1, Title = "dadfad1"}, new Term {Id = 1, Title = "dadfad1"}, new Term {Id = 1, Title = "dadfad1"}}
         };
     }
     

@@ -51,7 +51,11 @@
         <MauiImage Update="Resources\Images\bell.svg" Resize="True" BaseSize="48,48" />
         <MauiImage Update="Resources\Images\settings.svg" Resize="True" BaseSize="48,48" />
         <MauiImage Update="Resources\Images\home.svg" Resize="True" BaseSize="48,48" />
+		<MauiImage Update="Resources\Images\assessment.svg" Resize="True" BaseSize="48,48" />
+		<MauiImage Update="Resources\Images\course.svg" Resize="True" BaseSize="48,48" />
+		<MauiImage Update="Resources\Images\term.svg" Resize="True" BaseSize="48,48" />
         <MauiImage Update="Resources\Images\owl.svg" Resize="True" BaseSize="72,72" />
+		<MauiImage Update="Resources\Images\delete.svg" Resize="True" BaseSize="48, 48" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
