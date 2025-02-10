@@ -12,11 +12,4 @@ public partial class HomePage : ContentPage
         _viewModel = viewModel;
         this.BindingContext = viewModel;
     }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-        
-        _viewModel.LoadStudent();
-    }
 }

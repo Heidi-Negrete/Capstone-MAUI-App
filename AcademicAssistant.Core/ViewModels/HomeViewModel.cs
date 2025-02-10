@@ -29,9 +29,4 @@ public partial class HomeViewModel: ObservableRecipient
         Student = _repository.GetStudent();;
         Terms = new ObservableCollection<Term>(Student.Terms);
     }
-
-    public void LoadStudent()
-    {
-       Student = _repository.GetStudent(); 
-    }
 }

@@ -51,13 +51,6 @@
                      Grid.Column="0"
                      Color="{StaticResource aaLightAccent}"/>
 
-            <!-- Main Content -->
-            <!--<Label
-                Grid.Row="2"
-                Grid.Column="0"
-                Text="{Binding Title}"
-                Style="{StaticResource Headline}"/>-->
-
 
                 <CollectionView Grid.Row="2" Grid.Column="0"
                                 x:Name="lvTerms"
@@ -66,7 +59,6 @@
                                 
                     <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Term" x:Key="SwipeViewTemplate">
-                        
                         <SwipeView>
 
                             <SwipeView.RightItems>
@@ -81,6 +73,14 @@
                             </SwipeView.RightItems>
                             
                             <Grid Padding="0, 24,0, 24">
+                                
+                                <!-- This context menu is for Windows, since swipe view doesn't work on Windows -->
+                                <FlyoutBase.ContextFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem Text="Delete" IconImageSource="delete.png"></MenuFlyoutItem>
+                                    </MenuFlyout>
+                                </FlyoutBase.ContextFlyout>
+                                
                                 
                                 <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="48"/>
@@ -128,7 +128,8 @@
                             
                             
                         </Grid>
-                        </SwipeView> 
+                        </SwipeView>
+                        
                         
                         
                     </DataTemplate>
