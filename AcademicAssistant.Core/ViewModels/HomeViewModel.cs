@@ -18,7 +18,6 @@ public partial class HomeViewModel: ObservableRecipient
             SetProperty(ref _student, value);
         }
     }
-    public string Title { get; set; } = "Academic Assistant";
 
     [ObservableProperty]
     private ObservableCollection<Term> _terms;
