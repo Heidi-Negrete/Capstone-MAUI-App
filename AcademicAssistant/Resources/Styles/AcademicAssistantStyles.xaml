@@ -137,6 +137,8 @@
             <Setter Property="RefreshControlColor" Value="{StaticResource aaDarkAccent}" />
     </Style>
     
+    <!-- Does not work but selection is not highlighted on windows and this removes highlight on android making it equally broken on both platforms. -->
+    <!-- THIS WOULD WORK IF Normal STATE SET BACKGROUND COLOR TO TRANSPARENT -->
     <!-- This should change the background color of the SwipeView when selected and reset after de-selection, but it doesn't work -->
     
     <!--<Style TargetType="SwipeView">

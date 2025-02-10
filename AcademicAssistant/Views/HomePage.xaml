@@ -55,11 +55,30 @@
                 <CollectionView Grid.Row="2" Grid.Column="0"
                                 x:Name="lvTerms"
                                 SelectionMode="Single"
-                                ItemsSource="{Binding Terms}" IsEnabled="True">
+                                ItemsSource="{Binding Terms}" 
+                                IsEnabled="True">
                                 
                     <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Term" x:Key="SwipeViewTemplate">
                         <SwipeView>
+                            
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    
+                                    
+                                    <VisualState x:Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="{StaticResource aaLightAccent}"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="Transparent"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            
 
                             <SwipeView.RightItems>
                                 <SwipeItems>
@@ -73,6 +92,8 @@
                             </SwipeView.RightItems>
                             
                             <Grid Padding="0, 24,0, 24">
+                                
+                                
                                 
                                 <!-- This context menu is for Windows, since swipe view doesn't work on Windows -->
                                 <FlyoutBase.ContextFlyout>
