@@ -226,6 +226,14 @@
                                     Value="{StaticResource aaFontAlt}"/>
                         </VisualState.Setters>
                     </VisualState>
+                    <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                    <Setter Property="TextColor"
+                                            Value="{StaticResource aaDarkAccent}"/>
+                                    <Setter Property="BackgroundColor"
+                                            Value="{StaticResource aaLightAccent}"/>
+                            </VisualState.Setters>
+                    </VisualState>
                     <VisualState x:Name="PointerOver"/>
                 </VisualStateGroup>
             </VisualStateGroupList>
