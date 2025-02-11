@@ -5,6 +5,8 @@ namespace AcademicAssistant.Repositories.Models;
 public partial class Term : ObservableObject
 {
     public int Id { get; set; }
+    
+    public int StudentId { get; set; }
 
     [ObservableProperty]
     private string _title;

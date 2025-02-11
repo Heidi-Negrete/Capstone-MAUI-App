@@ -32,7 +32,7 @@ public partial class HomeViewModel: ObservableRecipient
     {
         _repository = repository;
         Student = _repository.GetStudent();
-        Terms = new ObservableCollection<Term>(Student.Terms);
+        Terms = new ObservableCollection<Term>(repository.GetTerms());
         TermSelected = false;
     }
 
@@ -49,7 +49,7 @@ public partial class HomeViewModel: ObservableRecipient
     public void AddTerm()
     {
         _repository.AddTerm();
-        Terms = new ObservableCollection<Term>(Student.Terms);
+        Terms = new ObservableCollection<Term>(_repository.GetTerms());
     }
 
     [RelayCommand]
