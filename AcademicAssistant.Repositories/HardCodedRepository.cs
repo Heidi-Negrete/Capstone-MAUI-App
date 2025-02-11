@@ -4,7 +4,8 @@ namespace AcademicAssistant.Repositories;
 
 public class HardCodedRepository : IRepository
 {
-    private Student _student; 
+    private Student _student;
+    private int TermId = 7;
 
     public HardCodedRepository()
     {
@@ -12,7 +13,7 @@ public class HardCodedRepository : IRepository
         {
             Id = 1,
             Name = "John Doe",
-            Terms = new List<Term>() {new Term {Id = 1, Title = "Fall 2021"}, new Term {Id = 1, Title = "Slrjg 2021"}, new Term {Id = 1, Title = "dadfad1"}, new Term {Id = 1, Title = "dadfad1"}, new Term {Id = 1, Title = "dadfad1"}, new Term {Id = 1, Title = "dadfad1"}, new Term {Id = 1, Title = "dadfad1"}, new Term {Id = 1, Title = "dadfad1"}, new Term {Id = 1, Title = "dadfad1"}, new Term {Id = 1, Title = "dadfad1"}, new Term {Id = 1, Title = "dadfad1"}}
+            Terms = new List<Term>() {new Term {Id = 1, Title = "Fall 2021"}, new Term {Id = 2, Title = "Winter 2021"}, new Term {Id = 3, Title = "Term Three"}, new Term {Id = 4, Title = "Term Four"}, new Term {Id = 5, Title = "Term Five"}, new Term {Id = 6, Title = "Final Term"}}
         };
     }
     
@@ -25,5 +26,15 @@ public class HardCodedRepository : IRepository
     public void UpdateStudent(int id, Student student)
     {
         _student = student;
+    }
+    
+    public void DeleteTerm(int termId)
+    {
+        _student.Terms.Remove(_student.Terms.First(t => t.Id == termId));
+    }
+    
+    public void AddTerm()
+    {
+        _student.Terms.Add(new Term {Id = TermId++, Title = "New Term"});
     }
 }

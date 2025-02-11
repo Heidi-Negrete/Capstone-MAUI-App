@@ -2,8 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:vm="clr-namespace:AcademicAssistant.Core.ViewModels;assembly=AcademicAssistant.Core"
              xmlns:models="clr-namespace:AcademicAssistant.Repositories.Models;assembly=AcademicAssistant.Repositories"
+             xmlns:vm="clr-namespace:AcademicAssistant.Core.ViewModels;assembly=AcademicAssistant.Core"
              x:DataType="vm:HomeViewModel"
              x:Class="AcademicAssistant.Views.HomePage"
              Title="Home">
@@ -56,10 +56,15 @@
                                 x:Name="lvTerms"
                                 SelectionMode="Single"
                                 ItemsSource="{Binding Terms}" 
-                                IsEnabled="True">
+                                IsEnabled="True"
+                                SelectedItem="{Binding SelectedTerm}"
+                                EmptyView="Add a term to get started!"
+                                SelectionChangedCommand="{Binding SelectionChangedCommand}" 
+                                SelectionChangedCommandParameter="{Binding Path=SelectedItem, Source={RelativeSource Self}}"
+                                >
                                 
                     <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Term" x:Key="SwipeViewTemplate">
+                    <DataTemplate>
                         <SwipeView>
                             
                             <VisualStateManager.VisualStateGroups>
@@ -84,7 +89,9 @@
                                 <SwipeItems>
                                     <SwipeItemView>
                                         <HorizontalStackLayout BackgroundColor="Red">
-                                            <ImageButton Source="delete.png" Margin="10,0"></ImageButton>
+                                            <ImageButton Source="delete.png" Margin="10,0" Command="{Binding DeleteTermCommand,
+      Source={RelativeSource AncestorType={x:Type
+        vm:HomeViewModel}}}"></ImageButton>
                                         </HorizontalStackLayout>
                                     </SwipeItemView>
                                     
@@ -96,9 +103,11 @@
                                 
                                 
                                 <!-- This context menu is for Windows, since swipe view doesn't work on Windows -->
-                                <FlyoutBase.ContextFlyout>
+                                <FlyoutBase.ContextFlyout >
                                     <MenuFlyout>
-                                        <MenuFlyoutItem Text="Delete" IconImageSource="delete.png"></MenuFlyoutItem>
+                                        <MenuFlyoutItem Text="Delete" IconImageSource="delete.png" Command="{Binding DeleteTermCommand,
+      Source={RelativeSource AncestorType={x:Type
+        vm:HomeViewModel}}}"></MenuFlyoutItem>
                                     </MenuFlyout>
                                 </FlyoutBase.ContextFlyout>
                                 
@@ -123,20 +132,23 @@
                                     ></Image>
                             <Label Grid.Column="1"
                                    Grid.Row="0"
+                                   x:DataType="models:Term"
                                    Text="{Binding Title}"
                                    Padding="10, 0"
                                    VerticalOptions="End"
                                    HorizontalOptions="Start"
                                    TextColor="{StaticResource aaDarkAccent}"
                                    FontSize="24"/>
+                                <!-- TO DO MAKE CONVERTER FOR DATE -->
                             <Label Grid.Column="1"
                                    Grid.Row="1"
                                    Padding="10, 0, 0, 0"
-                                   Text="July 8 - August 8"
+                                   Text="July 2021 - Dec 2021"
                                    VerticalOptions="Start"
                                    HorizontalOptions="Start"
                                    FontSize="16"
                                    TextColor="{StaticResource aaFontAlt}"/>
+                                <!-- TO DO MAKE CONVERTER for # of courses in term -->
                             <Label Grid.Column="2"
                                    Grid.Row="0"
                                    Grid.RowSpan="2"
@@ -159,7 +171,11 @@
             </CollectionView>
             
             <VerticalStackLayout Grid.Row="3" Grid.ColumnSpan="3">
-                <Button  Text="Add Term" BackgroundColor="{StaticResource aaDarkAccent}" TextColor="{StaticResource aaBackground}" Margin="10, 10" VerticalOptions="End"></Button>
+                <HorizontalStackLayout VerticalOptions="End" HorizontalOptions="Center">
+                    <Button  Text="Add Term" BackgroundColor="{StaticResource aaDarkAccent}" TextColor="{StaticResource aaBackground}" Margin="10, 10" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding AddTermCommand}"></Button>
+                    <Button  IsVisible="{Binding TermSelected}" Text="View/Edit Term" BackgroundColor="{StaticResource aaDarkAccent}" TextColor="{StaticResource aaBackground}" Margin="10, 10" VerticalOptions="Center" HorizontalOptions="Center"></Button>
+                </HorizontalStackLayout>
+                
             </VerticalStackLayout>
 
         </Grid>
