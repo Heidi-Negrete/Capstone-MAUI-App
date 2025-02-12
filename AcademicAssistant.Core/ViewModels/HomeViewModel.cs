@@ -61,5 +61,11 @@ public partial class HomeViewModel: ObservableRecipient
             TermSelected = true;
         }
     }
-    
+
+    [RelayCommand]
+    public async void ViewSelectedTerm()
+    {
+        if (SelectedTerm == null) return;
+        await Shell.Current.GoToAsync($"term?id={SelectedTerm.Id}");
+    }
 }

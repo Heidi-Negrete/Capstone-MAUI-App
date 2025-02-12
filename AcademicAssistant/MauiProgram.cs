@@ -29,10 +29,12 @@ public static class MauiProgram
         // Views
         builder.Services.AddSingleton<HomePage>();
         builder.Services.AddSingleton<SettingsPage>();
+        builder.Services.AddTransient<TermDetailsPage>();
         
         // ViewModels
         builder.Services.AddSingleton<HomeViewModel>();
         builder.Services.AddSingleton<SettingsViewModel>();
+        builder.Services.AddTransient<TermDetailsViewModel>();
 
         return builder.Build();
     }

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:AcademicAssistant.Core.ViewModels;assembly=AcademicAssistant.Core"
+             x:DataType="vm:TermDetailsViewModel"
              x:Class="AcademicAssistant.Views.TermDetailsPage"
              Title="Term Details">
     <VerticalStackLayout>
         <Label
-            Text="Welcome to .NET MAUI!"
+            Text="{Binding Term.Title, FallbackValue='Term not found'}"
             VerticalOptions="Center"
             HorizontalOptions="Center"/>
     </VerticalStackLayout>

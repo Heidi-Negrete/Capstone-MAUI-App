@@ -9,4 +9,5 @@ public interface IRepository
     public List<Term> GetTerms();
     public void DeleteTerm(int termId);
     public void AddTerm();
+    public Term GetTermById(int termId);
 }

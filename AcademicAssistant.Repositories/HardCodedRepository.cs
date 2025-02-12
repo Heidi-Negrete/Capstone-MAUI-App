@@ -49,4 +49,9 @@ public class HardCodedRepository : IRepository
     {
         _terms.Add(new Term {Id = TermId++, Title = "New Term"});
     }
+    
+    public Term GetTermById(int termId)
+    {
+        return _terms.First(t => t.Id == termId);
+    }
 }
