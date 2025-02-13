@@ -257,10 +257,16 @@
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CommonStates">
                     <VisualState x:Name="Normal"/>
+                    <VisualState x:Name="Hovered">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor"
+                                    Value="{StaticResource aaDarkAccent}"/>
+                        </VisualState.Setters>
+                    </VisualState>
                     <VisualState x:Name="Disabled">
                         <VisualState.Setters>
                             <Setter Property="TextColor"
-                                    Value="{StaticResource aaFontAlt}"/>
+                                    Value="{StaticResource aaFontMain}"/>
                         </VisualState.Setters>
                     </VisualState>
                 </VisualStateGroup>
