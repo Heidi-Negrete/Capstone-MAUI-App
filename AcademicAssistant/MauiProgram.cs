@@ -1,5 +1,6 @@
 ﻿using AcademicAssistant.Core.ViewModels;
 using AcademicAssistant.Repositories;
+using AcademicAssistant.Repositories.Models;
 using AcademicAssistant.Views;
 using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
@@ -30,11 +31,13 @@ public static class MauiProgram
         builder.Services.AddSingleton<HomePage>();
         builder.Services.AddSingleton<SettingsPage>();
         builder.Services.AddTransient<TermDetailsPage>();
+        builder.Services.AddTransient<CourseDetailsPage>();
         
         // ViewModels
         builder.Services.AddSingleton<HomeViewModel>();
         builder.Services.AddSingleton<SettingsViewModel>();
         builder.Services.AddTransient<TermDetailsViewModel>();
+        builder.Services.AddTransient<CourseDetailsViewModel>();
 
         return builder.Build();
     }
