@@ -1,9 +1,26 @@
+using AcademicAssistant.Core.ViewModels;
+
 namespace AcademicAssistant.Views;
 
+[QueryProperty(nameof(AssessmentId), "id")]
 public partial class AssessmentDetailsPage : ContentPage
 {
-    public AssessmentDetailsPage()
+    private readonly AssessmentDetailsViewModel _viewModel;
+    private int assessmentId;
+
+    public int AssessmentId
+    {
+        get => assessmentId;
+        set
+        {
+            assessmentId = value;
+            _viewModel.LoadData(value);
+        }
+    }
+    public AssessmentDetailsPage(AssessmentDetailsViewModel viewModel)
     {
         InitializeComponent();
+        _viewModel = viewModel;
+        this.BindingContext = _viewModel;
     }
 }
