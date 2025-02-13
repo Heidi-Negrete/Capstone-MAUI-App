@@ -1,7 +1,8 @@
+using System.Collections.ObjectModel;
 using AcademicAssistant.Repositories;
 using AcademicAssistant.Repositories.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
-using System.Diagnostics;
+using CommunityToolkit.Mvvm.Input;
 
 namespace AcademicAssistant.Core.ViewModels;
 
@@ -13,15 +14,55 @@ public partial class TermDetailsViewModel : ObservableRecipient
     
     [ObservableProperty] private Term _term;
     
+    [ObservableProperty] private bool _courseSelected;
+    
+    [ObservableProperty] private Course _selectedCourse;
+    
+    [ObservableProperty] private ObservableCollection<Course> _courses;
+    
     public TermDetailsViewModel(IRepository repository)
     {
         _repository = repository;
-        Trace.WriteLine("TermDetailsViewModel created.");
     }
 
     public void LoadData(int TermId)
     {
-        Trace.WriteLine("Loading term data for term id: " + TermId);
         Term = _repository.GetTermById(TermId);
+        Courses = new ObservableCollection<Course>(_repository.GetCoursesByTermId(TermId));
+        CourseSelected = false;
+    }
+    
+    [RelayCommand]
+    public void DeleteCourse()
+    {
+        if (SelectedCourse == null) return;
+        _repository.DeleteCourse(SelectedCourse.Id);
+        Courses.Remove(SelectedCourse);
+        SelectionChanged(null); // On Android if swipeview used to delete, selectionchanged does not fire
+    }
+    
+    [RelayCommand]
+    public void AddCourse()
+    
+    {
+        _repository.AddCourse(Term.Id);
+        Courses = new ObservableCollection<Course>(_repository.GetCoursesByTermId(Term.Id));
+    }
+
+    [RelayCommand]
+    public void SelectionChanged(Course? course)
+    {
+        if (course == null) CourseSelected = false;
+        else
+        {
+            CourseSelected = true;
+        }
+    }
+
+    [RelayCommand]
+    public async void ViewSelectedCourse()
+    {
+        if (SelectedCourse == null) return;
+        await Shell.Current.GoToAsync($"course?id={SelectedCourse.Id}");
     }
 }

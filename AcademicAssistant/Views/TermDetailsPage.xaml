@@ -2,13 +2,198 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:AcademicAssistant.Core.ViewModels;assembly=AcademicAssistant.Core"
+             xmlns:models="clr-namespace:AcademicAssistant.Repositories.Models;assembly=AcademicAssistant.Repositories"
              x:DataType="vm:TermDetailsViewModel"
              x:Class="AcademicAssistant.Views.TermDetailsPage"
              Title="Term Details">
+    
     <VerticalStackLayout>
-        <Label
-            Text="{Binding Term.Title, FallbackValue='Term not found'}"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="90"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="650"/>
+                <RowDefinition Height= "48"/>
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Header -->
+            <Image Grid.Row="0"
+                   Grid.Column="0"
+                   Source="owl.png"
+                   HeightRequest="50"
+                   WidthRequest="50"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center"/>
+            <Entry
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="50,0,50,0"
+                Text="{Binding Term.Title, FallbackValue='Term not found'}"
+                FontSize="24"
+                HorizontalOptions="Start"
+                VerticalOptions="Center"/>
+            <VerticalStackLayout 
+                Grid.Row="0"
+                Padding="0,0,0,10"
+                Grid.Column="0"
+                VerticalOptions="Center"
+                HorizontalOptions="End">
+                <HorizontalStackLayout>
+                    <Label Text="Start Date: " FontSize="16" VerticalOptions="Center"></Label>
+                    <DatePicker Date="{Binding Term.StartDate}"></DatePicker>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label Text="End Date: " FontSize="16" VerticalOptions="Center"></Label>
+                    <DatePicker Date="{Binding Term.EndDate}"></DatePicker>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+            
+
+            <BoxView Grid.Row="1"
+                     Grid.Column="0"
+                     Color="{StaticResource aaDarkAccent}"/>
+
+
+                <CollectionView Grid.Row="2" Grid.Column="0"
+                                x:Name="lvTerms"
+                                Margin="0, 10, 0, 0"
+                                SelectionMode="Single"
+                                ItemsSource="{Binding Courses}" 
+                                IsEnabled="True"
+                                SelectedItem="{Binding SelectedCourse}"
+                                EmptyView="Add a course to get started!"
+                                SelectionChangedCommand="{Binding SelectionChangedCommand}" 
+                                SelectionChangedCommandParameter="{Binding Path=SelectedItem, Source={RelativeSource Self}}"
+                                >
+                                
+                    <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    
+                                    
+                                    <VisualState x:Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="{StaticResource aaLightAccent}"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="Transparent"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            
+
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItemView>
+                                        <HorizontalStackLayout BackgroundColor="Red">
+                                            <ImageButton Source="delete.png" Margin="10,0" Command="{Binding DeleteCourseCommand,
+      Source={RelativeSource AncestorType={x:Type
+        vm:TermDetailsViewModel}}}"></ImageButton>
+                                        </HorizontalStackLayout>
+                                    </SwipeItemView>
+                                    
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            
+                            <Grid Padding="0, 24,0, 24">
+                                
+                                
+                                
+                                <!-- This context menu is for Windows, since swipe view doesn't work on Windows -->
+                                <FlyoutBase.ContextFlyout >
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem Text="Delete" IconImageSource="delete.png" Command="{Binding DeleteCourseCommand, Source={RelativeSource AncestorType={x:Type
+        vm:TermDetailsViewModel}}}"></MenuFlyoutItem>
+                                    </MenuFlyout>
+                                </FlyoutBase.ContextFlyout>
+                                
+                                
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="48"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Image Grid.Column="0"
+                                    Grid.Row="0"
+                                    Grid.RowSpan="2"
+                                    Source="course.png"
+                                   VerticalOptions="Center"
+                                    Margin="10,0,10,0"
+                                    ></Image>
+                            <Label Grid.Column="1"
+                                   Grid.Row="0"
+                                   x:DataType="models:Course"
+                                   Text="{Binding Title}"
+                                   Padding="10, 0"
+                                   VerticalOptions="End"
+                                   HorizontalOptions="Start"
+                                   TextColor="{StaticResource aaDarkAccent}"
+                                   FontSize="24"/>
+                                <!-- TO DO MAKE CONVERTER FOR DATE -->
+                            <Label Grid.Column="1"
+                                   Grid.Row="1"
+                                   Padding="10, 0, 0, 0"
+                                   Text="July 2021 - Dec 2021"
+                                   VerticalOptions="Start"
+                                   HorizontalOptions="Start"
+                                   FontSize="16"
+                                   TextColor="{StaticResource aaFontAlt}"/>
+                                <!-- TO DO MAKE CONVERTER for # of assessments in course -->
+                                <!-- TO DO MAKE CONVERTER FOR InstructorId to Instructor Name -->
+                            <Label Grid.Column="2"
+                                   Grid.Row="0"
+                                   Text="Instructor Patel"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="End"
+                                   FontSize="20"
+                                   Padding="0,0,5, 0"
+                                   TextColor="{StaticResource aaFontMain}"/>
+                                <Label Grid.Column="2"
+                                       Grid.Row="1"
+                                       Text="0/2 Assessments"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="End"
+                                       FontSize="16"
+                                       Padding="0,0,5, 0"
+                                       TextColor="{StaticResource aaFontAlt}"/>
+                            
+                            
+                        </Grid>
+                        </SwipeView>
+                        
+                        
+                        
+                    </DataTemplate>
+                        
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
+            <VerticalStackLayout Grid.Row="3" Grid.ColumnSpan="3">
+                <HorizontalStackLayout VerticalOptions="End" HorizontalOptions="Center">
+                    <Button  Text="Add Course" BackgroundColor="{StaticResource aaDarkAccent}" TextColor="{StaticResource aaBackground}" Margin="10, 10" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding AddCourseCommand}"></Button>
+                    <Button  IsVisible="{Binding CourseSelected}" Text="View/Edit Course" BackgroundColor="{StaticResource aaDarkAccent}" TextColor="{StaticResource aaBackground}" Margin="10, 10" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding ViewSelectedCourseCommand}"></Button>
+                </HorizontalStackLayout>
+                
+            </VerticalStackLayout>
+
+        </Grid>
+        
+        
     </VerticalStackLayout>
 </ContentPage>

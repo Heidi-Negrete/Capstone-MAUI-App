@@ -14,12 +14,15 @@ public partial class Course : ObservableObject
 
     [ObservableProperty]
     private DateTime _endDate;
+    
+    [ObservableProperty]
+    private int _termId;
 
     [ObservableProperty]
     private AcademicStatus.Status _status;
 
     [ObservableProperty]
-    private Instructor _instructor;
+    private int _instructorId;
 
     [ObservableProperty]
     private string _notes;
