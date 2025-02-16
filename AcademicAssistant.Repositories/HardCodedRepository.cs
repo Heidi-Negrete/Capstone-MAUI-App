@@ -10,6 +10,7 @@ public class HardCodedRepository : IRepository
     private List<Course> _courses;
     private int CourseId = 7; // Start at 7 because we have 6 hardcoded courses
     private Instructor _instructor;
+    private List<Assessment> _assessments;
 
     public HardCodedRepository()
     {
@@ -62,51 +63,93 @@ public class HardCodedRepository : IRepository
                 Id = 6, Title = "Course 6", StartDate = new DateTime(2021, 6, 1), EndDate = new DateTime(2021, 6, 30), TermId = 5, InstructorId = 1
             }
         };
+        _assessments = new List<Assessment>()
+        {
+            new PerformanceAssessment
+            {
+                Id = 1, Title = "Assessment 1", StartDate = new DateTime(2021, 1, 15), EndDate = new DateTime(2021, 6, 15), CourseId = 1, About = "This is a performance assessment", Status = AcademicStatus.Status.InProgress
+            },
+            new ObjectiveAssessment
+            {
+                Id = 2, Title = "Assessment 2", StartDate = new DateTime(2021, 2, 15), EndDate = new DateTime(2021, 6, 15), CourseId = 1, About = "This is an objective assessment", Status = AcademicStatus.Status.InProgress
+            },
+            new PerformanceAssessment
+            {
+                Id = 3, Title = "Assessment 3", StartDate = new DateTime(2021, 3, 15), EndDate = new DateTime(2021, 6, 15), CourseId = 2, About = "This is a performance assessment", Status = AcademicStatus.Status.InProgress
+            },
+            new ObjectiveAssessment
+            {
+                Id = 4, Title = "Assessment 4", StartDate = new DateTime(2021, 4, 15), EndDate = new DateTime(2021, 6, 15), CourseId = 2, About = "This is an objective assessment", Status = AcademicStatus.Status.InProgress
+            },
+            new PerformanceAssessment
+            {
+                Id = 5, Title = "Assessment 5", StartDate = new DateTime(2021, 5, 15), EndDate = new DateTime(2021, 6, 15), CourseId = 3, About = "This is a performance assessment", Status = AcademicStatus.Status.InProgress
+            },
+            new ObjectiveAssessment
+            {
+                Id = 6, Title = "Assessment 6", StartDate = new DateTime(2021, 6, 15), EndDate = new DateTime(2021, 6, 15), CourseId = 3, About = "This is an objective assessment", Status = AcademicStatus.Status.InProgress
+            }
+        };
     }
     
-    public Student GetStudent()
+    public async Task<Student> GetStudent()
     {
         // return a new student with some hardcoded data
         return _student;
     }
     
-    public void UpdateStudent(int id, Student student)
+    public async Task UpdateStudent(int id, Student student)
     {
-        _student = student;
+         _student = student;
     }
     
-    public List<Term> GetTerms()
+    public async Task<List<Term>> GetTerms()
     {
         return _terms;
     }
     
-    public void DeleteTerm(int termId)
+    public async Task DeleteTerm(int termId)
     {
         _terms.Remove(_terms.First(t => t.Id == termId));
     }
     
-    public void AddTerm()
+    public async Task AddTerm(int StudentId)
     {
-        _terms.Add(new Term {Id = TermId++, Title = "New Term"});
+        _terms.Add(new Term {Id = TermId++, Title = "New Term", StudentId = StudentId});
     }
     
-    public Term GetTermById(int termId)
+    public async Task<Term> GetTermById(int termId)
     {
         return _terms.First(t => t.Id == termId);
     }
     
-    public List<Course> GetCoursesByTermId(int termId)
+    public async Task<List<Course>> GetCoursesByTermId(int termId)
     {
         return _courses.Where(c => c.TermId == termId).ToList();
     }
     
-    public void DeleteCourse(int courseId)
+    public async Task DeleteCourse(int courseId)
     {
         _courses.Remove(_courses.First(c => c.Id == courseId));
     }
     
-    public void AddCourse(int termId)
+    public async Task AddCourse(int termId)
     {
         _courses.Add(new Course {Id = CourseId++, Title = "New Course", TermId = termId});
+    }
+    
+    public async Task<Course> GetCourseById(int courseId)
+    {
+        return _courses.First(c => c.Id == courseId);
+    }
+    
+    public async Task<List<Assessment>> GetAssessmentsByCourseId(int courseId)
+    {
+        return _assessments.Where(a => a.CourseId == courseId).ToList();
+    }
+    
+    public async Task<Assessment> GetAssessmentById(int assessmentId)
+    {
+        return _assessments.First(a => a.Id == assessmentId);
     }
 }
