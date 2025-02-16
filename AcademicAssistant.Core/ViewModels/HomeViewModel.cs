@@ -31,8 +31,7 @@ public partial class HomeViewModel: ObservableRecipient
     public HomeViewModel(IRepository repository)
     {
         _repository = repository;
-        Student = _repository.GetStudent();
-        Terms = new ObservableCollection<Term>(repository.GetTerms());
+        LoadData();
         TermSelected = false;
     }
 
@@ -46,10 +45,10 @@ public partial class HomeViewModel: ObservableRecipient
     }
     
     [RelayCommand]
-    public void AddTerm()
+    public async void AddTerm()
     {
-        _repository.AddTerm();
-        Terms = new ObservableCollection<Term>(_repository.GetTerms());
+        _repository.AddTerm(Student.Id);
+        Terms = new ObservableCollection<Term>(await _repository.GetTerms());
     }
 
     [RelayCommand]
@@ -67,5 +66,11 @@ public partial class HomeViewModel: ObservableRecipient
     {
         if (SelectedTerm == null) return;
         await Shell.Current.GoToAsync($"term?id={SelectedTerm.Id}");
+    }
+
+    public async void LoadData()
+    {
+        Student = await _repository.GetStudent();
+        Terms = new ObservableCollection<Term>(await _repository.GetTerms());
     }
 }

@@ -22,12 +22,12 @@ public partial class SettingsViewModel : ObservableRecipient
     public SettingsViewModel(IRepository repository)
     {
         _repository = repository;
-        Student = repository.GetStudent();
+        LoadStudent();
     }
     
-    public void LoadStudent()
+    public async void LoadStudent()
     {
-        Student = _repository.GetStudent(); 
+        Student = await _repository.GetStudent(); 
     }
     
     [RelayCommand]

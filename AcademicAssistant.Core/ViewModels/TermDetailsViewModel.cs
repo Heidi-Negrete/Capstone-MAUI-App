@@ -25,10 +25,10 @@ public partial class TermDetailsViewModel : ObservableRecipient
         _repository = repository;
     }
 
-    public void LoadData(int TermId)
+    public async void LoadData(int TermId)
     {
-        Term = _repository.GetTermById(TermId);
-        Courses = new ObservableCollection<Course>(_repository.GetCoursesByTermId(TermId));
+        Term = await _repository.GetTermById(TermId);
+        Courses = new ObservableCollection<Course>(await _repository.GetCoursesByTermId(TermId));
         CourseSelected = false;
     }
     
@@ -42,11 +42,11 @@ public partial class TermDetailsViewModel : ObservableRecipient
     }
     
     [RelayCommand]
-    public void AddCourse()
+    public async void AddCourse()
     
     {
         _repository.AddCourse(Term.Id);
-        Courses = new ObservableCollection<Course>(_repository.GetCoursesByTermId(Term.Id));
+        Courses = new ObservableCollection<Course>(await _repository.GetCoursesByTermId(Term.Id));
     }
 
     [RelayCommand]
