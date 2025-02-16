@@ -1,19 +1,29 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using SQLite;
 
 namespace AcademicAssistant.Repositories.Models;
 
-public partial class Term : ObservableObject
+public partial class Term : ObservableValidator
 {
+    [Required]
+    [PrimaryKey, AutoIncrement]                                                                                                                               
     public int Id { get; set; }
     
+    [Required]
+    [ForeignKey("Student")]
     public int StudentId { get; set; }
 
+    [Required]
     [ObservableProperty]
     private string _title;
 
+    [Required]
     [ObservableProperty]
     private DateTime _startDate;
     
+    [Required]
     [ObservableProperty]
     private DateTime _endDate;
     
