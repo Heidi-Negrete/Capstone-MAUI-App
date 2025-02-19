@@ -7,7 +7,7 @@ public class AcademicStatus
         InProgress,
         Completed,
         Failed,
-
+        Unknown,
         Dropped,
         Planned
     }
