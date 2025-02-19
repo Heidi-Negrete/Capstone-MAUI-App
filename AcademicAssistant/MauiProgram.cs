@@ -1,9 +1,11 @@
-﻿using AcademicAssistant.Core.ViewModels;
+﻿using AcademicAssistant.Core.Managers;
+using AcademicAssistant.Core.ViewModels;
 using AcademicAssistant.Repositories;
 using AcademicAssistant.Repositories.Models;
 using AcademicAssistant.Views;
 using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
+using Plugin.LocalNotification;
 
 namespace AcademicAssistant;
 
@@ -14,6 +16,7 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            .UseLocalNotification()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -40,6 +43,9 @@ public static class MauiProgram
         builder.Services.AddTransient<TermDetailsViewModel>();
         builder.Services.AddTransient<CourseDetailsViewModel>();
         builder.Services.AddTransient<AssessmentDetailsViewModel>();
+        
+        // Notification Manager
+        builder.Services.AddSingleton<NotificationManager>();
 
         return builder.Build();
     }

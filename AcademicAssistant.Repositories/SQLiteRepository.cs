@@ -99,6 +99,16 @@ public class SQLiteRepository : IRepository
     {
         return await _database.Table<Assessment>().Where(a => a.Id == assessmentId).FirstOrDefaultAsync();
     }
+    
+    public async Task<List<Course>> GetCourses()
+    {
+        return await _database.Table<Course>().ToListAsync();
+    }
+    
+    public async Task<List<Assessment>> GetAssessments()
+    {
+        return await _database.Table<Assessment>().ToListAsync();
+    }
 
     public Course CreateNewCourse(int termId)
     {

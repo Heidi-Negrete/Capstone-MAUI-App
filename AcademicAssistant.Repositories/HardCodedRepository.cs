@@ -40,7 +40,7 @@ public class HardCodedRepository : IRepository
         {
             new Course
             {
-                Id = 1, Title = "Course 1", StartDate = new DateTime(2021, 1, 1), EndDate = new DateTime(2021, 1, 31), TermId = 1, InstructorId = 1, InstructorName = "Anika Patel", InstructorEmail = "anika.patel @strimeuniversity.edu",InstructorPhone = "555-123-4567"
+                Id = 1, Title = "Course 1", StartDate = DateTime.Today, EndDate = DateTime.Today.AddDays(1), TermId = 1, InstructorId = 1, InstructorName = "Anika Patel", InstructorEmail = "anika.patel @strimeuniversity.edu",InstructorPhone = "555-123-4567", NotificationEnabled = true
             },
             new Course
             {
@@ -67,7 +67,7 @@ public class HardCodedRepository : IRepository
         {
             new PerformanceAssessment
             {
-                Id = 1, Title = "Assessment 1", StartDate = new DateTime(2021, 1, 15), EndDate = new DateTime(2021, 6, 15), CourseId = 1, About = "This is a performance assessment", Status = AcademicStatus.Status.InProgress
+                Id = 1, Title = "Assessment 1", StartDate = new DateTime(2021, 1, 15), EndDate = DateTime.Today.AddDays(1), CourseId = 1, About = "This is a performance assessment", Status = AcademicStatus.Status.InProgress, NotificationEnabled = true
             },
             new ObjectiveAssessment
             {
@@ -151,5 +151,15 @@ public class HardCodedRepository : IRepository
     public async Task<Assessment> GetAssessmentById(int assessmentId)
     {
         return _assessments.First(a => a.Id == assessmentId);
+    }
+    
+    public async Task<List<Course>> GetCourses()
+    {
+        return _courses;
+    }
+    
+    public async Task<List<Assessment>> GetAssessments()
+    {
+        return _assessments;
     }
 }

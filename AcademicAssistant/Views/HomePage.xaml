@@ -41,11 +41,13 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Margin="0,0,20,0"
-                Source="bell_notification.png"
+                Source="{Binding NotificationIcon}"
                 HeightRequest="48"
                 WidthRequest="48"
                 VerticalOptions="Center"
-                HorizontalOptions="End"/>
+                HorizontalOptions="End"
+                Clicked="NotificationButton_OnClicked"
+                />
 
             <BoxView Grid.Row="1"
                      Grid.Column="0"
