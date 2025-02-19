@@ -145,33 +145,22 @@
                                    HorizontalOptions="Start"
                                    TextColor="{StaticResource aaDarkAccent}"
                                    FontSize="24"/>
-                                <!-- TO DO MAKE CONVERTER FOR DATE -->
-                            <Label Grid.Column="1"
-                                   Grid.Row="1"
-                                   Padding="10, 0, 0, 0"
-                                   Text="July 2021 - Dec 2021"
-                                   VerticalOptions="Start"
-                                   HorizontalOptions="Start"
-                                   FontSize="16"
-                                   TextColor="{StaticResource aaFontAlt}"/>
-                                <!-- TO DO MAKE CONVERTER for # of assessments in course -->
-                                <!-- TO DO MAKE CONVERTER FOR InstructorId to Instructor Name -->
                             <Label Grid.Column="2"
                                    Grid.Row="0"
-                                   Text="Instructor Patel"
+                                   x:DataType="models:Course"
                                    VerticalOptions="Center"
                                    HorizontalOptions="End"
-                                   FontSize="20"
+                                   FontSize="16"
                                    Padding="0,0,5, 0"
-                                   TextColor="{StaticResource aaFontMain}"/>
-                                <Label Grid.Column="2"
-                                       Grid.Row="1"
-                                       Text="0/2 Assessments"
-                                       VerticalOptions="Center"
-                                       HorizontalOptions="End"
-                                       FontSize="16"
-                                       Padding="0,0,5, 0"
-                                       TextColor="{StaticResource aaFontAlt}"/>
+                                   TextColor="{StaticResource aaFontMain}">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0:MMM dd} - {1:MMM dd}">
+                                        <Binding Path="StartDate" />
+                                        <Binding Path="EndDate" />
+                                    </MultiBinding>
+                                </Label.Text>
+                                </Label>
+
                             
                             
                         </Grid>

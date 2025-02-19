@@ -3,10 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:AcademicAssistant.Core.ViewModels;assembly=AcademicAssistant.Core"
              xmlns:models="clr-namespace:AcademicAssistant.Repositories.Models;assembly=AcademicAssistant.Repositories"
+             xmlns:conv="clr-namespace:AcademicAssistant.Core.Converters;assembly=AcademicAssistant.Core"
              x:DataType="vm:AssessmentDetailsViewModel"
              x:Class="AcademicAssistant.Views.AssessmentDetailsPage"
              Title="Assessment Details">
 
+    <ContentPage.Resources>
+        <conv:AcademicStatusConverter x:Key="StatusConverter"></conv:AcademicStatusConverter>
+    </ContentPage.Resources>
     <VerticalStackLayout>
         
         <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
@@ -25,7 +29,7 @@
                     FontSize="24"
                     HorizontalOptions="Start"
                     VerticalOptions="Center"/>
-                <Label FontSize="16" TextColor="{DynamicResource aaFontAlt}" Text="{Binding Assessment}" HorizontalOptions="Center"></Label>
+                <Label FontSize="16" TextColor="{DynamicResource aaFontAlt}" Text="{Binding Assessment.Type}" HorizontalOptions="Center"></Label>
             </VerticalStackLayout>
             
         </HorizontalStackLayout>
@@ -45,24 +49,31 @@
                     <Label Text="End Date: " FontSize="16" VerticalOptions="Center"></Label>
                     <DatePicker Date="{Binding Assessment.EndDate}"></DatePicker>
                 </HorizontalStackLayout>
+                
             </HorizontalStackLayout>
+        
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <Label Text="Notifications: " FontSize="16" VerticalOptions="Center"></Label>
+            <Switch IsToggled="{Binding Assessment.NotificationEnabled}"></Switch>
+        </HorizontalStackLayout>
             
         <BoxView HeightRequest="8" Margin="0,10" Color="{StaticResource aaLightAccent}"/>
             <HorizontalStackLayout HorizontalOptions="Center">
                 <Label Text="Status: " FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
-                <Picker HorizontalOptions="Center" FontSize="24" VerticalOptions="Center" ItemsSource="{Binding AssessmentStatusList}" Title="{Binding AssessmentStatus}"></Picker>
+                <Label Text="{Binding Assessment.Status, Mode=OneWay, Converter={StaticResource StatusConverter}}" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center" Padding="10,0"/>
+                <Picker HorizontalOptions="Center" FontSize="24" VerticalOptions="Center" ItemsSource="{Binding AssessmentStatusList}" SelectedItem="{Binding Assessment.Status}"></Picker>
             </HorizontalStackLayout>
             
             
         <BoxView HeightRequest="8" Margin="0,10" Color="{StaticResource aaLightAccent}"/>
         
         <Label
-               Text="About:"
+               Text="Info:"
                FontSize="24"
                Margin="10,10,10,10"/>
         <Frame HeightRequest="400" WidthRequest="350" CornerRadius="10" Padding="10">
             <Editor
-                Text="{Binding About}"
+                Text="{Binding Assessment.About}"
                 FontSize="16"
                 Margin="10,10,10,10"/>
         </Frame>

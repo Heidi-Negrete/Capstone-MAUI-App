@@ -3,16 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:AcademicAssistant.Core.ViewModels;assembly=AcademicAssistant.Core"
              xmlns:models="clr-namespace:AcademicAssistant.Repositories.Models;assembly=AcademicAssistant.Repositories"
+             xmlns:conv="clr-namespace:AcademicAssistant.Core.Converters;assembly=AcademicAssistant.Core"
              x:DataType="vm:CourseDetailsViewModel"
              x:Class="AcademicAssistant.Views.CourseDetailsPage"
              Title="Course Details">
 
+    <ContentPage.Resources>
+        <conv:AcademicStatusConverter x:Key="StatusConverter"></conv:AcademicStatusConverter>
+    </ContentPage.Resources>
+        
     <VerticalStackLayout>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="90"/>
+                <RowDefinition Height="130"/>
                 <RowDefinition Height="5"/>
-                <RowDefinition Height="650"/>
+                <RowDefinition Height="240"/>
+                <RowDefinition Height="340"/>
                 <RowDefinition Height= "48"/>
 
             </Grid.RowDefinitions>
@@ -49,6 +55,10 @@
                 <HorizontalStackLayout>
                     <Label Text="End Date: " FontSize="16" VerticalOptions="Center"></Label>
                     <DatePicker Date="{Binding Course.EndDate}"></DatePicker>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout HorizontalOptions="Center">
+                    <Label Text="Notifications: " FontSize="16" VerticalOptions="Center"></Label>
+                    <Switch IsToggled="{Binding Course.NotificationEnabled}"></Switch>
                 </HorizontalStackLayout>
             </VerticalStackLayout>
             
@@ -100,6 +110,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
                             <Image Grid.Column="0"
@@ -113,25 +124,24 @@
                                    Grid.Row="0"
                                    x:DataType="models:Assessment"
                                    Text="{Binding Title}"
-                                   Padding="10, 0"
+                                   Padding="8, 0"
                                    VerticalOptions="End"
                                    HorizontalOptions="Start"
                                    TextColor="{StaticResource aaDarkAccent}"
                                    FontSize="24"/>
-                                <!-- TO DO MAKE CONVERTER FOR type of Assessment (objective or performance) -->
                             <Label Grid.Column="1"
                                    Grid.Row="1"
-                                   Padding="10, 0, 0, 0"
-                                   Text="Performance Assessment"
+                                   x:DataType="models:Assessment"
+                                   Padding="8, 0, 0, 0"
+                                   Text="{Binding Type}"
                                    VerticalOptions="Start"
                                    HorizontalOptions="Start"
-                                   FontSize="16"
+                                   FontSize="14"
                                    TextColor="{StaticResource aaFontAlt}"/>
-                                <!-- TO DO MAKE CONVERTER for status of assessment -->
-                                <!-- TO DO MAKE CONVERTER FOR Assessment due dates -->
                             <Label Grid.Column="2"
                                    Grid.Row="0"
-                                   Text="Incomplete"
+                                   x:DataType="models:Assessment"
+                                   Text="{Binding Status, Mode=OneWay, Converter={StaticResource StatusConverter}}"
                                    VerticalOptions="Center"
                                    HorizontalOptions="End"
                                    FontSize="20"
@@ -139,12 +149,20 @@
                                    TextColor="{StaticResource aaFontMain}"/>
                                 <Label Grid.Column="2"
                                        Grid.Row="1"
-                                       Text="Jan 1 - Jun 30"
                                        VerticalOptions="Center"
                                        HorizontalOptions="End"
                                        FontSize="16"
                                        Padding="0,0,5, 0"
-                                       TextColor="{StaticResource aaFontAlt}"/>
+                                       TextColor="{StaticResource aaFontAlt}"
+                                       x:DataType="models:Assessment">
+                                    
+                                    <Label.Text>
+                                        <MultiBinding StringFormat="{}{0:MMM dd} - {1:MMM dd}">
+                                            <Binding Path="StartDate" />
+                                            <Binding Path="EndDate" />
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
                             
                             
                         </Grid>
@@ -157,10 +175,44 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
             
-            <VerticalStackLayout Grid.Row="3" Grid.ColumnSpan="3">
+            
+            
+            <ScrollView Grid.Row="3" Grid.ColumnSpan="3">
+                <VerticalStackLayout>
+                    <BoxView HeightRequest="8" Margin="0,10" Color="{StaticResource aaLightAccent}"/>
+                    <Label Text="Instructor: " FontSize="24" Margin="5,0,0,5"/>
+                    <Frame HeightRequest="100" WidthRequest="350" CornerRadius="10" Padding="10">
+                        <Label>
+                        <Label.Text>
+                            <MultiBinding StringFormat='{}{0}&#x0a;{1}&#x0a;{2}'>
+                                <Binding Path="Course.InstructorName" />
+                                <Binding Path="Course.InstructorEmail" />
+                                <Binding Path="Course.InstructorPhone" />
+                            </MultiBinding>
+                        </Label.Text>
+                            </Label>
+                    </Frame>
+                    
+                    <Label Text="Notes:" Margin="5,5,5,5" FontSize="24"/>
+                    <Frame HeightRequest="170" WidthRequest="350" CornerRadius="10" Padding="10">
+                    
+                        <Editor
+                            Text="{Binding Course.Notes}"
+                            FontSize="16"
+                            Margin="10,10,10,10"/>
+                    </Frame>
+                    
+                </VerticalStackLayout>
+                
+            </ScrollView>
+            
+            <VerticalStackLayout Grid.Row="4" Grid.ColumnSpan="3">
+                
                 <HorizontalStackLayout VerticalOptions="End" HorizontalOptions="Center">
                     <Button  IsVisible="{Binding AssessmentSelected}" Text="View/Edit Assessment" BackgroundColor="{StaticResource aaDarkAccent}" TextColor="{StaticResource aaBackground}" Margin="10, 10" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding ViewSelectedAssessmentCommand}"></Button>
                 </HorizontalStackLayout>
+                
+                
                 
             </VerticalStackLayout>
 
