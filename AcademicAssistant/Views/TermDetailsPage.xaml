@@ -3,9 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:AcademicAssistant.Core.ViewModels;assembly=AcademicAssistant.Core"
              xmlns:models="clr-namespace:AcademicAssistant.Repositories.Models;assembly=AcademicAssistant.Repositories"
+             xmlns:conv="clr-namespace:AcademicAssistant.Core.Converters;assembly=AcademicAssistant.Core"
              x:DataType="vm:TermDetailsViewModel"
              x:Class="AcademicAssistant.Views.TermDetailsPage"
              Title="Term Details">
+    
+    <ContentPage.Resources>
+        <conv:AcademicStatusConverter x:Key="StatusConverter"></conv:AcademicStatusConverter>
+    </ContentPage.Resources>
     
     <VerticalStackLayout>
         <Grid>
@@ -145,8 +150,10 @@
                                    HorizontalOptions="Start"
                                    TextColor="{StaticResource aaDarkAccent}"
                                    FontSize="24"/>
+                                <Label Grid.Column="2" Grid.Row="0" VerticalOptions="Center"
+                                       HorizontalOptions="End" Text="{Binding Status, Converter={StaticResource StatusConverter}}" />
                             <Label Grid.Column="2"
-                                   Grid.Row="0"
+                                   Grid.Row="1"
                                    x:DataType="models:Course"
                                    VerticalOptions="Center"
                                    HorizontalOptions="End"
@@ -160,6 +167,7 @@
                                     </MultiBinding>
                                 </Label.Text>
                                 </Label>
+                                
 
                             
                             

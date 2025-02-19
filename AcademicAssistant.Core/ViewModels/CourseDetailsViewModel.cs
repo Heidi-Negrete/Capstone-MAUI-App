@@ -13,6 +13,8 @@ public partial class CourseDetailsViewModel : ObservableRecipient
     
     [ObservableProperty] private Course _course;
     
+    [ObservableProperty] private List<AcademicStatus.Status> _courseStatusList;
+    
     [ObservableProperty] private bool _assessmentSelected;
     
     [ObservableProperty] private Assessment _selectedAssessment;
@@ -29,6 +31,7 @@ public partial class CourseDetailsViewModel : ObservableRecipient
         Course = await _repository.GetCourseById(CourseId);
         Assessments = new ObservableCollection<Assessment>(await _repository.GetAssessmentsByCourseId(CourseId));
         AssessmentSelected = false;
+        CourseStatusList = Enum.GetValues(typeof(AcademicStatus.Status)).Cast<AcademicStatus.Status>().ToList();
     }
     
     [RelayCommand]
