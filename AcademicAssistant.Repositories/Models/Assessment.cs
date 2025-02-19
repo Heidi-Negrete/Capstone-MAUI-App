@@ -10,10 +10,15 @@ public partial class Assessment : ObservableValidator
     [Required]
     [PrimaryKey, AutoIncrement]
     public int Id { get; set; }
+    
+    [ObservableProperty]
+    private string _type;
 
     [Required]
     [ObservableProperty]
     private string _title;
+
+    [Required] [ObservableProperty] private bool _notificationEnabled = false;
 
     [Required]
     [ObservableProperty]
@@ -24,7 +29,7 @@ public partial class Assessment : ObservableValidator
     private DateTime _endDate;
     
     [ObservableProperty] 
-    private AcademicStatus.Status _status;
+    private AcademicStatus.Status _status = AcademicStatus.Status.Planned;
     
     [Required]
     [ForeignKey("Course")]

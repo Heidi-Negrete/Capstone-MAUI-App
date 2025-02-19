@@ -2,8 +2,8 @@
 
 public class PerformanceAssessment : Assessment
 {
-    public override string ToString()
+    public PerformanceAssessment()
     {
-        return "Performance Assessment";
+        Type = "Performance Assessment";
     }
 }

@@ -40,27 +40,27 @@ public class HardCodedRepository : IRepository
         {
             new Course
             {
-                Id = 1, Title = "Course 1", StartDate = new DateTime(2021, 1, 1), EndDate = new DateTime(2021, 1, 31), TermId = 1, InstructorId = 1 
+                Id = 1, Title = "Course 1", StartDate = new DateTime(2021, 1, 1), EndDate = new DateTime(2021, 1, 31), TermId = 1, InstructorId = 1, InstructorName = "Anika Patel", InstructorEmail = "anika.patel @strimeuniversity.edu",InstructorPhone = "555-123-4567"
             },
             new Course
             {
-                Id = 2, Title = "Course 2", StartDate = new DateTime(2021, 2, 1), EndDate = new DateTime(2021, 2, 28), TermId = 1, InstructorId = 1
+                Id = 2, Title = "Course 2", StartDate = new DateTime(2021, 2, 1), EndDate = new DateTime(2021, 2, 28), TermId = 1, InstructorId = 1, InstructorName = "Anika Patel", InstructorEmail = "anika.patel @strimeuniversity.edu",InstructorPhone = "555-123-4567"
             },
             new Course
             {
-                Id = 3, Title = "Course 3", StartDate = new DateTime(2021, 3, 1), EndDate = new DateTime(2021, 3, 31), TermId = 1, InstructorId = 1
+                Id = 3, Title = "Course 3", StartDate = new DateTime(2021, 3, 1), EndDate = new DateTime(2021, 3, 31), TermId = 1, InstructorId = 1, InstructorName = "Anika Patel", InstructorEmail = "anika.patel @strimeuniversity.edu",InstructorPhone = "555-123-4567"
             },
             new Course
             {
-                Id = 4, Title = "Course 4", StartDate = new DateTime(2021, 4, 1), EndDate = new DateTime(2021, 4, 30), TermId = 3, InstructorId = 1
+                Id = 4, Title = "Course 4", StartDate = new DateTime(2021, 4, 1), EndDate = new DateTime(2021, 4, 30), TermId = 3, InstructorId = 1, InstructorName = "Anika Patel", InstructorEmail = "anika.patel @strimeuniversity.edu",InstructorPhone = "555-123-4567"
             },
             new Course
             {
-                Id = 5, Title = "Course 5", StartDate = new DateTime(2021, 5, 1), EndDate = new DateTime(2021, 5, 31), TermId = 3, InstructorId = 1
+                Id = 5, Title = "Course 5", StartDate = new DateTime(2021, 5, 1), EndDate = new DateTime(2021, 5, 31), TermId = 3, InstructorId = 1, InstructorName = "Anika Patel", InstructorEmail = "anika.patel @strimeuniversity.edu",InstructorPhone = "555-123-4567"
             },
             new Course
             {
-                Id = 6, Title = "Course 6", StartDate = new DateTime(2021, 6, 1), EndDate = new DateTime(2021, 6, 30), TermId = 5, InstructorId = 1
+                Id = 6, Title = "Course 6", StartDate = new DateTime(2021, 6, 1), EndDate = new DateTime(2021, 6, 30), TermId = 5, InstructorId = 1, InstructorName = "Anika Patel", InstructorEmail = "anika.patel @strimeuniversity.edu",InstructorPhone = "555-123-4567"
             }
         };
         _assessments = new List<Assessment>()

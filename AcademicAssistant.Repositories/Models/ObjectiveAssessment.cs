@@ -2,8 +2,8 @@
 
 public class ObjectiveAssessment : Assessment
 {
-    public override string ToString()
+    public ObjectiveAssessment()
     {
-        return "Objective Assessment";
+        Type = "Objective Assessment";
     }
 }
