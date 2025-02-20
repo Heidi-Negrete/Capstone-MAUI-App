@@ -113,9 +113,9 @@ public class HardCodedRepository : IRepository
         _terms.Remove(_terms.First(t => t.Id == termId));
     }
     
-    public async Task AddTerm(int StudentId)
+    public async Task AddTerm(Term? term = null)
     {
-        _terms.Add(new Term {Id = TermId++, Title = "New Term", StudentId = StudentId});
+        _terms.Add(new Term {Id = TermId++, Title = "New Term", StudentId = _student.Id});
     }
     
     public async Task<Term> GetTermById(int termId)
@@ -130,11 +130,22 @@ public class HardCodedRepository : IRepository
     
     public async Task DeleteCourse(int courseId)
     {
+        Course course = await GetCourseById(courseId);
+        Term term = await GetTermById(course.TermId);
+        term.CourseCount--;
+        // To DO Update term in database
         _courses.Remove(_courses.First(c => c.Id == courseId));
     }
     
-    public async Task AddCourse(int termId)
+    public async Task AddCourse(int termId, Course? course = null)
     {
+        Term term = await GetTermById(termId);
+        if (term.CourseCount == term.MaxCourseCount)
+        {
+            throw new Exception("Max course count reached");
+        }
+        term.CourseCount++;
+        // To DO Update term in database
         _courses.Add(new Course {Id = CourseId++, Title = "New Course", TermId = termId});
     }
     

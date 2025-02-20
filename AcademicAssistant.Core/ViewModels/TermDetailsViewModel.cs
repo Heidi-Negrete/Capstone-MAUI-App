@@ -45,6 +45,12 @@ public partial class TermDetailsViewModel : ObservableRecipient
     public async void AddCourse()
     
     {
+        System.Diagnostics.Trace.WriteLine(Term.CourseCount + " " + Term.MaxCourseCount);
+        if (Term.CourseCount == Term.MaxCourseCount)
+        {
+            await Shell.Current.DisplayAlert("Error", "Max course count reached", "OK");
+            return;
+        }
         _repository.AddCourse(Term.Id);
         Courses = new ObservableCollection<Course>(await _repository.GetCoursesByTermId(Term.Id));
     }

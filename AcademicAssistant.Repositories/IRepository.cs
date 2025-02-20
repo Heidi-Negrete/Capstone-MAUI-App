@@ -8,11 +8,11 @@ public interface IRepository
     public Task UpdateStudent(int id, Student student);
     public Task<List<Term>> GetTerms();
     public Task DeleteTerm(int termId);
-    public Task AddTerm(int studentId);
+    public Task AddTerm(Term? term = null);
     public Task<Term> GetTermById(int termId);
     public Task<List<Course>> GetCoursesByTermId(int termId);
     public Task DeleteCourse(int courseId);
-    public Task AddCourse(int termId);
+    public Task AddCourse(int termId, Course? course = null);
     public Task<Course> GetCourseById(int courseId);
     public Task<List<Assessment>> GetAssessmentsByCourseId(int courseId);
     public Task<Assessment> GetAssessmentById(int assessmentId);

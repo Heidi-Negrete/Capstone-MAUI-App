@@ -55,7 +55,7 @@ public partial class HomeViewModel: ObservableRecipient
     [RelayCommand]
     public async void AddTerm()
     {
-        _repository.AddTerm(Student.Id);
+        _repository.AddTerm();
         Terms = new ObservableCollection<Term>(await _repository.GetTerms());
     }
 

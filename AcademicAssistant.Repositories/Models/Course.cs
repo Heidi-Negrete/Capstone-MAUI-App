@@ -13,17 +13,13 @@ public partial class Course : ObservableValidator
 
     [Required]
     [ObservableProperty] 
-    private string _title;
+    private string _title = "New Course";
 
     [Required] [ObservableProperty] private bool _notificationEnabled = false;
 
-    [Required]
-    [ObservableProperty] 
-    private DateTime _startDate;
+    [Required] [ObservableProperty] private DateTime _startDate = DateTime.Today;
 
-    [Required]
-    [ObservableProperty]
-    private DateTime _endDate;
+    [Required] [ObservableProperty] private DateTime _endDate = DateTime.Now.AddDays(7);
     
     [Required]
     [ForeignKey("Term")]
