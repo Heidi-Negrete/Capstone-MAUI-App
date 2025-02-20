@@ -50,4 +50,14 @@ public partial class CourseDetailsViewModel : ObservableRecipient
         if (SelectedAssessment == null) return;
         await Shell.Current.GoToAsync($"assessment?id={SelectedAssessment.Id}");
     }
+
+    [RelayCommand]
+    public async Task ShareNotes(string text)
+    {
+        await Share.Default.RequestAsync(new ShareTextRequest
+        {
+            Text = text,
+            Title = $"{Course.Title} Notes"
+        });
+    }
 }
