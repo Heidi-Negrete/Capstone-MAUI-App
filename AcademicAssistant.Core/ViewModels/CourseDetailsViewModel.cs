@@ -24,13 +24,13 @@ public partial class CourseDetailsViewModel : ObservableRecipient
     public CourseDetailsViewModel(IRepository repository)
     {
         _repository = repository;
+        AssessmentSelected = false;
     }
 
     public async void LoadData(int CourseId)
     {
         Course = await _repository.GetCourseById(CourseId);
         Assessments = new ObservableCollection<Assessment>(await _repository.GetAssessmentsByCourseId(CourseId));
-        AssessmentSelected = false;
         CourseStatusList = Enum.GetValues(typeof(AcademicStatus.Status)).Cast<AcademicStatus.Status>().ToList();
     }
     

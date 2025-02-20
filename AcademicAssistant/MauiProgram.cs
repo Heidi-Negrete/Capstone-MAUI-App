@@ -33,16 +33,16 @@ public static class MauiProgram
         // Views
         builder.Services.AddSingleton<HomePage>();
         builder.Services.AddSingleton<SettingsPage>();
-        builder.Services.AddTransient<TermDetailsPage>();
-        builder.Services.AddTransient<CourseDetailsPage>();
-        builder.Services.AddTransient<AssessmentDetailsPage>();
+        builder.Services.AddSingleton<TermDetailsPage>();
+        builder.Services.AddSingleton<CourseDetailsPage>();
+        builder.Services.AddSingleton<AssessmentDetailsPage>();
         
         // ViewModels
         builder.Services.AddSingleton<HomeViewModel>();
         builder.Services.AddSingleton<SettingsViewModel>();
-        builder.Services.AddTransient<TermDetailsViewModel>();
-        builder.Services.AddTransient<CourseDetailsViewModel>();
-        builder.Services.AddTransient<AssessmentDetailsViewModel>();
+        builder.Services.AddSingleton<TermDetailsViewModel>();
+        builder.Services.AddSingleton<CourseDetailsViewModel>();
+        builder.Services.AddSingleton<AssessmentDetailsViewModel>();
         
         // Notification Manager
         builder.Services.AddSingleton<NotificationManager>();

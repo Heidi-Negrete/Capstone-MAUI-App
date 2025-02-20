@@ -23,13 +23,13 @@ public partial class TermDetailsViewModel : ObservableRecipient
     public TermDetailsViewModel(IRepository repository)
     {
         _repository = repository;
+        CourseSelected = false;
     }
 
     public async void LoadData(int TermId)
     {
         Term = await _repository.GetTermById(TermId);
         Courses = new ObservableCollection<Course>(await _repository.GetCoursesByTermId(TermId));
-        CourseSelected = false;
     }
     
     [RelayCommand]
