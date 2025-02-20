@@ -8,10 +8,6 @@
     <VerticalStackLayout>
         <Label Text="Settings"
                Style="{StaticResource Headline}"/>
-        <Label
-            Text="Change your cettings here!"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"/>
         <HorizontalStackLayout Margin="0,24">
             <Label Text="Name"
                    Style="{StaticResource SubHeadline}"
