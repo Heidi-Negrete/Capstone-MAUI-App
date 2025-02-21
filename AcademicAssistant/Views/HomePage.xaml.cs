@@ -14,6 +14,11 @@ public partial class HomePage : ContentPage
         this.BindingContext = viewModel;
     }
 
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        base.OnNavigatedTo(args);
+        _viewModel.LoadData();
+    }
 
     private void NotificationButton_OnClicked(object? sender, EventArgs e)
     {

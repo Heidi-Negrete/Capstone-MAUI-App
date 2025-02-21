@@ -23,4 +23,10 @@ public partial class AssessmentDetailsPage : ContentPage
         _viewModel = viewModel;
         this.BindingContext = _viewModel;
     }
+    
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        base.OnNavigatedTo(args);
+        _viewModel.LoadData(AssessmentId);
+    }
 }

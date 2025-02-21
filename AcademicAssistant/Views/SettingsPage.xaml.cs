@@ -14,9 +14,9 @@ public partial class SettingsPage : ContentPage
         this.BindingContext = viewModel;
     }
     
-    protected override void OnAppearing()
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
-        base.OnAppearing();
+        base.OnNavigatedTo(args);
         _viewModel.LoadStudent();
     }
 }
