@@ -14,7 +14,6 @@ public partial class TermDetailsPage : ContentPage
 		set
 		{
 			termId = value;
-			_viewModel.LoadData(value);
 		}
 	}
 	public TermDetailsPage(TermDetailsViewModel viewModel)

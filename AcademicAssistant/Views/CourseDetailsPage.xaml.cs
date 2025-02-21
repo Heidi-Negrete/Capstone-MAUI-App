@@ -14,7 +14,6 @@ public partial class CourseDetailsPage : ContentPage
 		set
 		{
 			courseId = value;
-			_viewModel.LoadData(value);
 		}
 	}
 	public CourseDetailsPage(CourseDetailsViewModel viewModel)

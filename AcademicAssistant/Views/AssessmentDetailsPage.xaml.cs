@@ -14,7 +14,6 @@ public partial class AssessmentDetailsPage : ContentPage
         set
         {
             assessmentId = value;
-            _viewModel.LoadData(value);
         }
     }
     public AssessmentDetailsPage(AssessmentDetailsViewModel viewModel)
