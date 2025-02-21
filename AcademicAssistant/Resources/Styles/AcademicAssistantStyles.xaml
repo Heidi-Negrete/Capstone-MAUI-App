@@ -195,6 +195,29 @@
             </Setter>
     </Style>
     
+    <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Red" />
+            <Setter Property="BackgroundColor" Value="{StaticResource aaAccentWarning}" />
+            <Setter Property="FontFamily" Value="OpenSansRegular"/>
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="PlaceholderColor" Value="{StaticResource aaFontAlt}" />
+            <Setter Property="MinimumHeightRequest" Value="44"/>
+            <Setter Property="MinimumWidthRequest" Value="44"/>
+            <Setter Property="VerticalTextAlignment" Value="End"/>
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="Disabled">
+                                            <VisualState.Setters>
+                                                    <Setter Property="TextColor" Value="{StaticResource aaFontAlt}" />
+                                            </VisualState.Setters>
+                                    </VisualState>
+                            </VisualStateGroup>
+                    </VisualStateGroupList>
+            </Setter>
+    </Style>
+    
     <Style TargetType="Button">
         <Setter Property="TextColor"
                 Value="{StaticResource aaBackground}"/>
