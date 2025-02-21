@@ -28,7 +28,7 @@ public static class MauiProgram
         builder.Logging.AddDebug();
 #endif
         // repository for dependency injection
-        builder.Services.AddSingleton<IRepository, HardCodedRepository>();
+        builder.Services.AddSingleton<IRepository, SQLiteRepository>();
         
         // Views
         builder.Services.AddSingleton<HomePage>();
@@ -43,7 +43,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<TermDetailsViewModel>();
         builder.Services.AddSingleton<CourseDetailsViewModel>();
         builder.Services.AddSingleton<AssessmentDetailsViewModel>();
-        
+
         // Notification Manager
         builder.Services.AddSingleton<NotificationManager>();
 

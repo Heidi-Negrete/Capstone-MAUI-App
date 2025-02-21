@@ -47,7 +47,4 @@ public partial class Course : ObservableValidator
     [Required]
     [ObservableProperty]
     private string _instructorPhone;
-    
-    // TO DO OBSERVABLE COLLECTION
-    public List<Assessment> Assessments { get; set; }
 }

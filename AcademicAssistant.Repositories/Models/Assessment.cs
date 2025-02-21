@@ -14,19 +14,15 @@ public partial class Assessment : ObservableValidator
     [ObservableProperty]
     private string _type;
 
-    [Required]
-    [ObservableProperty]
-    private string _title;
+    [Required] [ObservableProperty] private string _title;
 
     [Required] [ObservableProperty] private bool _notificationEnabled = false;
 
     [Required]
     [ObservableProperty]
-    private DateTime _startDate;
+    private DateTime _startDate = DateTime.Now;
 
-    [Required]
-    [ObservableProperty] 
-    private DateTime _endDate;
+    [Required] [ObservableProperty] private DateTime _endDate = DateTime.Now.AddDays(30);
     
     [ObservableProperty] 
     private AcademicStatus.Status _status = AcademicStatus.Status.Planned;

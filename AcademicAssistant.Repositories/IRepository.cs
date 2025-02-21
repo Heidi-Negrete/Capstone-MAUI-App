@@ -18,4 +18,6 @@ public interface IRepository
     public Task<Assessment> GetAssessmentById(int assessmentId);
     public Task<List<Course>> GetCourses();
     public Task<List<Assessment>> GetAssessments();
+    public Task UpdateCourse(int id, Course course);
+    public Task UpdateTerm(int id, Term term);
 }

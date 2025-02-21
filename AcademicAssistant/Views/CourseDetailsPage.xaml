@@ -135,7 +135,7 @@
                                    Grid.Row="1"
                                    x:DataType="models:Assessment"
                                    Padding="8, 0, 0, 0"
-                                   Text="{Binding Type}"
+                                   Text="{Binding Title}"
                                    VerticalOptions="Start"
                                    HorizontalOptions="Start"
                                    FontSize="14"

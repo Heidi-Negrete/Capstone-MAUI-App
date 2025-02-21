@@ -173,4 +173,14 @@ public class HardCodedRepository : IRepository
     {
         return _assessments;
     }
+
+    public Task UpdateCourse(int id, Course course)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task UpdateTerm(int id, Term term)
+    {
+        throw new NotImplementedException();
+    }
 }

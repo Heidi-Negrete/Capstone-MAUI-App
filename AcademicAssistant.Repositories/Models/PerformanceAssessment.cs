@@ -4,6 +4,7 @@ public class PerformanceAssessment : Assessment
 {
     public PerformanceAssessment()
     {
+        Title = "New PA";
         Type = "Performance Assessment";
     }
 }
