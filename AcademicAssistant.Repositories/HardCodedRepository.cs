@@ -183,4 +183,9 @@ public class HardCodedRepository : IRepository
     {
         throw new NotImplementedException();
     }
+
+    public Task UpdateAssessment(int id, Assessment assessment)
+    {
+        throw new NotImplementedException();
+    }
 }

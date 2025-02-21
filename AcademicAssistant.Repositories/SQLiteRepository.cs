@@ -214,7 +214,6 @@ namespace AcademicAssistant.Repositories
                 term.StartDate = updatedTerm.StartDate;
                 term.EndDate = updatedTerm.EndDate;
                 term.CourseCount = updatedTerm.CourseCount;
-                term.MaxCourseCount = updatedTerm.MaxCourseCount;
                 await _database.UpdateAsync(term);
             }
         }
@@ -229,7 +228,25 @@ namespace AcademicAssistant.Repositories
                 course.InstructorName = updatedCourse.InstructorName;
                 course.InstructorEmail = updatedCourse.InstructorEmail;
                 course.InstructorPhone = updatedCourse.InstructorPhone;
+                course.Notes = updatedCourse.Notes;
+                course.Status = updatedCourse.Status;
+                course.NotificationEnabled = updatedCourse.NotificationEnabled;
                 await _database.UpdateAsync(course);
+            }
+        }
+        
+        public async Task UpdateAssessment(int id, Assessment updatedAssessment)
+        {
+            await Init();
+            var assessment = await GetAssessmentById(id);
+            if (assessment != null)
+            {
+                assessment.Title = updatedAssessment.Title;
+                assessment.About = updatedAssessment.About;
+                assessment.StartDate = updatedAssessment.StartDate;
+                assessment.NotificationEnabled = updatedAssessment.NotificationEnabled;
+                assessment.Status = updatedAssessment.Status;
+                await _database.UpdateAsync(assessment);
             }
         }
     }
