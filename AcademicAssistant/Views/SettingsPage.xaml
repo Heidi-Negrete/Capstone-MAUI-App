@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:AcademicAssistant.Core.ViewModels;assembly=AcademicAssistant.Core"
+             xmlns:tk="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="vm:SettingsViewModel"
              x:Class="AcademicAssistant.Views.SettingsPage"
              Title="Settings">
@@ -14,7 +15,14 @@
                    VerticalOptions="Center"
                    HorizontalOptions="Center"
                    Margin="24,0,24,0"/>
-            <Entry Placeholder="Student Name" Text="{Binding Student.Name}"></Entry>
+            <Entry Placeholder="Student Name" Text="{Binding Student.Name}">
+                <Entry.Behaviors>
+                    <tk:TextValidationBehavior
+                        MinimumLength="1"
+                        Flags="ValidateOnValueChanged"
+                        />
+                </Entry.Behaviors>
+            </Entry>
         </HorizontalStackLayout>
         <Button Text="Save" Command="{Binding UpdateStudentCommand}"/>
     </VerticalStackLayout>

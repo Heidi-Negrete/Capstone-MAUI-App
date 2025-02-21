@@ -9,15 +9,8 @@ public partial class SettingsViewModel : ObservableRecipient
 {
     private readonly IRepository _repository;
     
+    [ObservableProperty]
     private Student _student;
-    public Student Student
-    {
-        get => _student;
-        set
-        {
-            SetProperty(ref _student, value);
-        }
-    }
 
     public SettingsViewModel(IRepository repository)
     {
@@ -33,7 +26,7 @@ public partial class SettingsViewModel : ObservableRecipient
     [RelayCommand]
     public async void UpdateStudent()
     {
-        _repository.UpdateStudent(_student.Id, _student);
+        _repository.UpdateStudent(Student.Id, Student);
 
         await Shell.Current.GoToAsync($"//home");
     }
