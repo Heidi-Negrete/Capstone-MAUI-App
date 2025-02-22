@@ -14,17 +14,20 @@ public partial class CourseDetailsViewModel : ObservableRecipient
     [ObservableProperty] private Course _course;
     
     [ObservableProperty] private List<AcademicStatus.Status> _courseStatusList;
-    
-    [ObservableProperty] private bool _assessmentSelected;
+
+    [ObservableProperty] private bool _assessmentSelected = false;
     
     [ObservableProperty] private Assessment _selectedAssessment;
     
     [ObservableProperty] private ObservableCollection<Assessment> _assessments;
     
+    [ObservableProperty] private bool _dataChanged = false; // Used to indicate whether 'Save' button should be shown
+    [ObservableProperty] private bool _changesValid = true; // Used to indicate whether 'Save' button should be enabled
+    private bool PageLoaded = false;
+    
     public CourseDetailsViewModel(IRepository repository)
     {
         _repository = repository;
-        AssessmentSelected = false;
     }
 
     public async void LoadData(int CourseId)
@@ -32,6 +35,8 @@ public partial class CourseDetailsViewModel : ObservableRecipient
         Course = await _repository.GetCourseById(CourseId);
         Assessments = new ObservableCollection<Assessment>(await _repository.GetAssessmentsByCourseId(CourseId));
         CourseStatusList = Enum.GetValues(typeof(AcademicStatus.Status)).Cast<AcademicStatus.Status>().ToList();
+        DataChanged = false;
+        PageLoaded = true;
     }
     
     [RelayCommand]
@@ -59,5 +64,61 @@ public partial class CourseDetailsViewModel : ObservableRecipient
             Text = text,
             Title = $"{Course.Title} Notes"
         });
+    }
+    
+    [RelayCommand]
+    public async void SaveChanges()
+    {
+        if (!ChangesValid)
+        {
+            await Shell.Current.DisplayAlert("Error", "Please check all fields before saving.", "OK");
+            return;
+        }
+        try
+        {
+            await _repository.UpdateCourse(Course.Id, Course);
+        }
+        catch (Exception e)
+        {
+            await Shell.Current.DisplayAlert("Failed to save changes.", e.Message, "OK");
+        }
+        DataChanged = false;
+    }
+    
+    [RelayCommand]
+    public async void AskUserToSaveChanges()
+    {
+        if (!DataChanged) await Shell.Current.GoToAsync($"term?id={Course.TermId}");
+        else
+        {
+            
+            if (ChangesValid)
+            {
+                var result = await Shell.Current.DisplayAlert("Save Changes", "You have unsaved changes. Would you like to save them?", "Yes", "No");
+                if (result)
+                {
+                    SaveChanges();
+                }
+            }
+            await Shell.Current.GoToAsync($"term?id={Course.TermId}");
+        }
+    }
+
+    [RelayCommand]
+    public async Task ConfirmDataChanged()
+    {
+        DataChanged = true;
+        await ValidateData();
+    }
+    
+    private async Task ValidateData()
+    {
+        if (!PageLoaded) return;
+        if (Course.StartDate > Course.EndDate)
+        {
+            ChangesValid = false;
+            await Shell.Current.DisplayAlert("Invalid Dates", "Please ensure your start date is before your end date.", "OK");
+            return;
+        }
     }
 }
