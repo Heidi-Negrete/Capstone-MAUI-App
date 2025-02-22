@@ -4,6 +4,7 @@
              xmlns:vm="clr-namespace:AcademicAssistant.Core.ViewModels;assembly=AcademicAssistant.Core"
              xmlns:models="clr-namespace:AcademicAssistant.Repositories.Models;assembly=AcademicAssistant.Repositories"
              xmlns:conv="clr-namespace:AcademicAssistant.Core.Converters;assembly=AcademicAssistant.Core"
+             xmlns:tk="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="vm:AssessmentDetailsViewModel"
              x:Class="AcademicAssistant.Views.AssessmentDetailsPage"
              Title="Assessment Details">
@@ -11,6 +12,11 @@
     <ContentPage.Resources>
         <conv:AcademicStatusConverter x:Key="StatusConverter"></conv:AcademicStatusConverter>
     </ContentPage.Resources>
+    
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding AskUserToSaveChangesCommand}"/>   
+    </Shell.BackButtonBehavior>
+    
     <VerticalStackLayout>
         
         <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
@@ -28,7 +34,20 @@
                     Text="{Binding Assessment.Title, FallbackValue='Assessment not found'}"
                     FontSize="24"
                     HorizontalOptions="Start"
-                    VerticalOptions="Center"/>
+                    VerticalOptions="Center">
+                    <Entry.Behaviors>
+                        <tk:TextValidationBehavior
+                            MinimumLength="1"
+                            Flags="ValidateOnValueChanged"
+                            IsValid="{Binding ChangesValid}"
+                            InvalidStyle="{StaticResource InvalidEntryStyle}"
+                        />
+                        <tk:EventToCommandBehavior
+                            EventName="TextChanged"
+                            Command="{Binding ConfirmDataChangedCommand}"
+                        />
+                    </Entry.Behaviors>
+                </Entry>
                 <Label FontSize="16" TextColor="{DynamicResource aaFontAlt}" Text="{Binding Assessment.Type}" HorizontalOptions="Center"></Label>
             </VerticalStackLayout>
             
@@ -43,25 +62,52 @@
                 HorizontalOptions="Center">
                 <HorizontalStackLayout HorizontalOptions="Center">
                     <Label Text="Start Date: " FontSize="16" VerticalOptions="Center"></Label>
-                    <DatePicker Date="{Binding Assessment.StartDate}"></DatePicker>
+                    <DatePicker Date="{Binding Assessment.StartDate}">
+                        <DatePicker.Behaviors>
+                            <tk:EventToCommandBehavior
+                                EventName="DateSelected"
+                                Command="{Binding ConfirmDataChangedCommand}"
+                            />
+                        </DatePicker.Behaviors>
+                    </DatePicker>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout HorizontalOptions="Center">
                     <Label Text="End Date: " FontSize="16" VerticalOptions="Center"></Label>
-                    <DatePicker Date="{Binding Assessment.EndDate}"></DatePicker>
+                    <DatePicker Date="{Binding Assessment.EndDate}">
+                        <DatePicker.Behaviors>
+                            <tk:EventToCommandBehavior
+                                EventName="DateSelected"
+                                Command="{Binding ConfirmDataChangedCommand}"
+                            />
+                        </DatePicker.Behaviors>
+                    </DatePicker>
                 </HorizontalStackLayout>
                 
             </HorizontalStackLayout>
         
         <HorizontalStackLayout HorizontalOptions="Center">
             <Label Text="Notifications: " FontSize="16" VerticalOptions="Center"></Label>
-            <Switch IsToggled="{Binding Assessment.NotificationEnabled}"></Switch>
+            <Switch IsToggled="{Binding Assessment.NotificationEnabled}">
+                <Switch.Behaviors>
+                    <tk:EventToCommandBehavior
+                        EventName="Toggled"
+                        Command="{Binding ConfirmDataChangedCommand}"/>
+                </Switch.Behaviors>
+            </Switch>
         </HorizontalStackLayout>
             
         <BoxView HeightRequest="8" Margin="0,10" Color="{StaticResource aaLightAccent}"/>
             <HorizontalStackLayout HorizontalOptions="Center">
                 <Label Text="Status: " FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
                 <Label Text="{Binding Assessment.Status, Mode=OneWay, Converter={StaticResource StatusConverter}}" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center" Padding="10,0"/>
-                <Picker HorizontalOptions="Center" FontSize="24" VerticalOptions="Center" ItemsSource="{Binding AssessmentStatusList}" SelectedItem="{Binding Assessment.Status}"></Picker>
+                <Picker HorizontalOptions="Center" FontSize="24" VerticalOptions="Center" ItemsSource="{Binding AssessmentStatusList}" SelectedItem="{Binding Assessment.Status}">
+                    <Picker.Behaviors>
+                        <tk:EventToCommandBehavior
+                            EventName="SelectedIndexChanged"
+                            Command="{Binding ConfirmDataChangedCommand}"
+                        />
+                    </Picker.Behaviors>
+                </Picker>
             </HorizontalStackLayout>
             
             
@@ -71,14 +117,20 @@
                Text="Info:"
                FontSize="24"
                Margin="10,10,10,10"/>
-        <Frame HeightRequest="400" WidthRequest="350" CornerRadius="10" Padding="10">
+        <Frame HeightRequest="325" WidthRequest="350" CornerRadius="10" Padding="10">
             <Editor
                 Text="{Binding Assessment.About}"
                 FontSize="16"
-                Margin="10,10,10,10"/>
+                Margin="10,10,10,10">
+                <Editor.Behaviors>
+                    <tk:EventToCommandBehavior
+                        EventName="Unfocused"
+                        Command="{Binding ConfirmDataChangedCommand}"/>
+                </Editor.Behaviors>
+            </Editor>
         </Frame>
             
-        
+        <Button  IsVisible="{Binding DataChanged}" Text="Save" Style="{StaticResource ValidatedButton}" TextColor="{StaticResource aaBackground}" Margin="10, 10" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding SaveChangesCommand}" IsEnabled="{Binding ChangesValid}"/>
     </VerticalStackLayout>
     
 </ContentPage>
