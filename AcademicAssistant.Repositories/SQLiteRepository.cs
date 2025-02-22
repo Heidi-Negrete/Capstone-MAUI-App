@@ -214,6 +214,7 @@ namespace AcademicAssistant.Repositories
                 term.StartDate = updatedTerm.StartDate;
                 term.EndDate = updatedTerm.EndDate;
                 term.CourseCount = updatedTerm.CourseCount;
+                term.NotificationEnabled = updatedTerm.NotificationEnabled;
                 await _database.UpdateAsync(term);
             }
         }
@@ -231,6 +232,8 @@ namespace AcademicAssistant.Repositories
                 course.Notes = updatedCourse.Notes;
                 course.Status = updatedCourse.Status;
                 course.NotificationEnabled = updatedCourse.NotificationEnabled;
+                course.EndDate = updatedCourse.EndDate;
+                course.StartDate = updatedCourse.StartDate;
                 await _database.UpdateAsync(course);
             }
         }
@@ -246,6 +249,8 @@ namespace AcademicAssistant.Repositories
                 assessment.StartDate = updatedAssessment.StartDate;
                 assessment.NotificationEnabled = updatedAssessment.NotificationEnabled;
                 assessment.Status = updatedAssessment.Status;
+                assessment.EndDate = updatedAssessment.EndDate;
+                assessment.StartDate = updatedAssessment.StartDate;
                 await _database.UpdateAsync(assessment);
             }
         }

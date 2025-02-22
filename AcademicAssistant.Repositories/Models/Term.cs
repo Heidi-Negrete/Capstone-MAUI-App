@@ -27,4 +27,7 @@ public partial class Term : ObservableValidator
     
     [ObservableProperty]
     private int _maxCourseCount = 6;
+    
+    [ObservableProperty]
+    private bool _notificationEnabled = false;
 }
