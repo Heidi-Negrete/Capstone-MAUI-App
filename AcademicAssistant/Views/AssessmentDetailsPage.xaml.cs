@@ -1,19 +1,27 @@
+using AcademicAssistant.Core.Converters;
 using AcademicAssistant.Core.ViewModels;
+using AcademicAssistant.Repositories.Models;
 
 namespace AcademicAssistant.Views;
 
-[QueryProperty(nameof(AssessmentId), "id")]
+[QueryProperty(nameof(AssessmentArgs), "assessment")]
 public partial class AssessmentDetailsPage : ContentPage
 {
     private readonly AssessmentDetailsViewModel _viewModel;
-    private int assessmentId;
 
-    public int AssessmentId
+    private AssessmentNavigator assessmentArgs;
+    public AssessmentNavigator AssessmentArgs
     {
-        get => assessmentId;
+        get => assessmentArgs;
         set
         {
-            assessmentId = value;
+            var id = value.Id;
+            var type = value.Type;
+            assessmentArgs = new AssessmentNavigator
+            {
+                Id = id,
+                Type = type
+            };
         }
     }
     public AssessmentDetailsPage(AssessmentDetailsViewModel viewModel)
@@ -26,6 +34,6 @@ public partial class AssessmentDetailsPage : ContentPage
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);
-        _viewModel.LoadData(AssessmentId);
+        _viewModel.LoadData(AssessmentArgs.Id, AssessmentArgs.Type);
     }
 }

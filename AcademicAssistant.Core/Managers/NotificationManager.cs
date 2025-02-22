@@ -32,7 +32,7 @@ public class NotificationManager
         
         foreach (var course in courses)
         {
-            if (course.NotificationEnabled && course.EndDate == DateTime.Today.AddDays(1) && !_notifiedCourses.Contains(course))
+            if (course.NotificationEnabled && course.EndDate == DateTime.Today.AddDays(1) && !_notifiedCourses.Any(c => c.Id == course.Id))
             {
                 notifications.Add(new Notification
                 {
@@ -46,7 +46,7 @@ public class NotificationManager
 
         foreach (var assessment in assessments)
         {
-            if (assessment.NotificationEnabled && assessment.EndDate == DateTime.Today.AddDays(1) && !_notifiedAssessments.Contains(assessment))
+            if (assessment.NotificationEnabled && assessment.EndDate == DateTime.Today.AddDays(1) && !_notifiedAssessments.Any(a => a.Id == assessment.Id))
             {
                 notifications.Add(new Notification
                     {
@@ -60,7 +60,7 @@ public class NotificationManager
         
         foreach (var term in terms)
         {
-            if (term.NotificationEnabled && term.EndDate == DateTime.Today.AddDays(1) && !_notifiedTerms.Contains(term))
+            if (term.NotificationEnabled && term.EndDate == DateTime.Today.AddDays(1) && !_notifiedTerms.Any(t => t.Id == term.Id))
             {
                 notifications.Add(new Notification
                 {

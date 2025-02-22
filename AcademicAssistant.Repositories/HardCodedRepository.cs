@@ -159,7 +159,7 @@ public class HardCodedRepository : IRepository
         return _assessments.Where(a => a.CourseId == courseId).ToList();
     }
     
-    public async Task<Assessment> GetAssessmentById(int assessmentId)
+    public async Task<Assessment> GetAssessmentById(int assessmentId, string type)
     {
         return _assessments.First(a => a.Id == assessmentId);
     }

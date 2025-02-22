@@ -12,11 +12,11 @@ namespace AcademicAssistant.Repositories
 
         public SQLiteRepository()
         {
-            // TEMPORARY FOR DEBUGGING
-            if (File.Exists(Constants.DatabasePath))
-            {
-                File.Delete(Constants.DatabasePath);
-            }
+            // Uncomment to delete and recreate the database on startup
+            // if (File.Exists(Constants.DatabasePath))
+            // {
+            //     File.Delete(Constants.DatabasePath);
+            // }
         }
 
         private async Task Init()
@@ -38,9 +38,15 @@ namespace AcademicAssistant.Repositories
             await _database.CreateTableAsync<ObjectiveAssessment>();
             await _database.CreateTableAsync<Instructor>();
 
-            if (_studentId == 0)
+            var student = await GetStudent();
+            if (student == null)
             {
                 await _database.InsertAsync(new Student() { Name = "John Doe" });
+            }
+
+            var terms = await _database.Table<Term>().ToListAsync();
+            if (terms.Count == 0)
+            {
                 _studentId = (await GetStudent()).Id;
                 await SeedData();
             }
@@ -181,14 +187,23 @@ namespace AcademicAssistant.Repositories
             return assessments;
         }
 
-        public async Task<Assessment> GetAssessmentById(int assessmentId)
+        public async Task<Assessment> GetAssessmentById(int assessmentId, string type)
         {
             await Init();
-            Assessment assessment = await _database.Table<PerformanceAssessment>().Where(a => a.Id == assessmentId).FirstOrDefaultAsync();
-            if (assessment == null)
+            Assessment? assessment = null;
+            if (type == "Objective Assessment")
             {
                 assessment = await _database.Table<ObjectiveAssessment>().Where(a => a.Id == assessmentId).FirstOrDefaultAsync();
             }
+            else if (type == "Performance Assessment")
+            {
+                assessment = await _database.Table<PerformanceAssessment>().Where(a => a.Id == assessmentId).FirstOrDefaultAsync();
+            }
+            if (assessment == null)
+            {
+                throw new Exception($"Assessment with ID {assessmentId} and type {type} not found.");
+            }
+
             return assessment;
         }
 
@@ -244,7 +259,7 @@ namespace AcademicAssistant.Repositories
         public async Task UpdateAssessment(int id, Assessment updatedAssessment)
         {
             await Init();
-            var assessment = await GetAssessmentById(id);
+            var assessment = await GetAssessmentById(id, updatedAssessment.Type);
             if (assessment != null)
             {
                 assessment.Title = updatedAssessment.Title;

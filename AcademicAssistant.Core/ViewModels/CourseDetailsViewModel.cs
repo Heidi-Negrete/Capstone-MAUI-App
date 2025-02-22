@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using AcademicAssistant.Core.Converters;
 using AcademicAssistant.Repositories;
 using AcademicAssistant.Repositories.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -52,7 +53,13 @@ public partial class CourseDetailsViewModel : ObservableRecipient
     public async void ViewSelectedAssessment()
     {
         if (SelectedAssessment == null) return;
-        await Shell.Current.GoToAsync($"assessment?id={SelectedAssessment.Id}");
+        AssessmentNavigator navArgs = new AssessmentNavigator
+        {
+            Id = SelectedAssessment.Id,
+            Type = SelectedAssessment.Type
+        };
+        var navigationParameter = new Dictionary<string, object> {{"assessment", navArgs}};
+        await Shell.Current.GoToAsync($"assessment", navigationParameter);
     }
 
     [RelayCommand]

@@ -25,9 +25,9 @@ public partial class AssessmentDetailsViewModel : ObservableRecipient
         _repository = repository;
     }
 
-    public async void LoadData(int AssessmentId)
+    public async void LoadData(int assessmentId, string assessmentType)
     {
-        Assessment = await _repository.GetAssessmentById(AssessmentId);
+        Assessment = await _repository.GetAssessmentById(assessmentId, assessmentType);
         AssessmentStatusList = Enum.GetValues(typeof(AcademicStatus.Status)).Cast<AcademicStatus.Status>().ToList();
         DataChanged = false;
     }
