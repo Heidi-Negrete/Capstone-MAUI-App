@@ -288,6 +288,7 @@
                     
                         <Editor
                             Text="{Binding Course.Notes}"
+                            Placeholder="Notes for this course."
                             FontSize="16"
                             Margin="10,10,10,10">
                             <Editor.Behaviors>
