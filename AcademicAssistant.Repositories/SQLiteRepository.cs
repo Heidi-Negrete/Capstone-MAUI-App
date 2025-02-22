@@ -57,6 +57,9 @@ namespace AcademicAssistant.Repositories
                 InstructorName = "Anika Patel",
                 InstructorEmail = "anika.patel@strimeuniversity.edu",
                 InstructorPhone = "555-123-4567",
+                StartDate = DateTime.Today.AddDays(-90),
+                EndDate = DateTime.Today.AddDays(1),
+                NotificationEnabled = true
             };
             await AddCourse(term.Id, course);
         }
