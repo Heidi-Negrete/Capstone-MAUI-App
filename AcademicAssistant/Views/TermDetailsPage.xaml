@@ -22,7 +22,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="140"/>
                 <RowDefinition Height="5"/>
-                <RowDefinition Height="550"/>
+                <RowDefinition Height="575"/>
                 <RowDefinition Height= "48"/>
 
             </Grid.RowDefinitions>
@@ -223,7 +223,7 @@
             <VerticalStackLayout Grid.Row="3" Grid.ColumnSpan="3">
                 <HorizontalStackLayout VerticalOptions="End" HorizontalOptions="Center">
                     <Button  IsVisible="{Binding TermDataChanged}" Text="Save" Style="{StaticResource ValidatedButton}" TextColor="{StaticResource aaBackground}" Margin="10, 10" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding SaveChangesCommand}" IsEnabled="{Binding ChangesValid}"/>
-                    <Button  Text="Add Course" BackgroundColor="{StaticResource aaDarkAccent}" TextColor="{StaticResource aaBackground}" Margin="10, 10" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding AddCourseCommand}"></Button>
+                    <Button  IsEnabled="{Binding NotReachedCourseLimit}" IsVisible="{Binding NotReachedCourseLimit}" Text="Add Course" BackgroundColor="{StaticResource aaDarkAccent}" TextColor="{StaticResource aaBackground}" Margin="10, 10" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding AddCourseCommand}"></Button>
                     <Button  IsVisible="{Binding CourseSelected}" Text="View/Edit Course" BackgroundColor="{StaticResource aaDarkAccent}" TextColor="{StaticResource aaBackground}" Margin="10, 10" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding ViewSelectedCourseCommand}"></Button>
                 </HorizontalStackLayout>
                 

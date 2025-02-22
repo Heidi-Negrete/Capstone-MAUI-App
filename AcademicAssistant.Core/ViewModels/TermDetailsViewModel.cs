@@ -24,6 +24,8 @@ public partial class TermDetailsViewModel : ObservableRecipient
 
     [ObservableProperty] private bool _termDataChanged = false; // Used to indicate whether 'Save' button should be shown
     
+    [ObservableProperty] private bool _notReachedCourseLimit = true; // Used to indicate whether max course count has been reached
+    
     public TermDetailsViewModel(IRepository repository)
     {
         _repository = repository;
@@ -35,29 +37,32 @@ public partial class TermDetailsViewModel : ObservableRecipient
         Courses = new ObservableCollection<Course>(await _repository.GetCoursesByTermId(TermId));
         TermDataChanged = false;
         CourseSelected = false;
+        NotReachedCourseLimit = !(Courses.Count == Term.MaxCourseCount);
     }
     
     [RelayCommand]
-    public void DeleteCourse()
+    public async Task DeleteCourse()
     {
         if (SelectedCourse == null) return;
-        _repository.DeleteCourse(SelectedCourse.Id);
+        await _repository.DeleteCourse(SelectedCourse.Id);
         Courses.Remove(SelectedCourse);
         SelectionChanged(null); // On Android if swipeview used to delete, selectionchanged does not fire
+        NotReachedCourseLimit = !(Courses.Count == Term.MaxCourseCount);
     }
     
     [RelayCommand]
-    public async void AddCourse()
+    public async Task AddCourse()
     
     {
-        System.Diagnostics.Trace.WriteLine(Term.CourseCount + " " + Term.MaxCourseCount);
         if (Term.CourseCount == Term.MaxCourseCount)
         {
             await Shell.Current.DisplayAlert("Error", "Max course count reached", "OK");
             return;
         }
-        _repository.AddCourse(Term.Id);
+        await _repository.AddCourse(Term.Id);
         Courses = new ObservableCollection<Course>(await _repository.GetCoursesByTermId(Term.Id));
+        System.Diagnostics.Trace.WriteLine("added course");
+        NotReachedCourseLimit = !(Courses.Count == Term.MaxCourseCount);
     }
 
     [RelayCommand]
