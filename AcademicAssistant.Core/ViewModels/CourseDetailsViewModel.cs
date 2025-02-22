@@ -35,6 +35,7 @@ public partial class CourseDetailsViewModel : ObservableRecipient
         Assessments = new ObservableCollection<Assessment>(await _repository.GetAssessmentsByCourseId(CourseId));
         CourseStatusList = Enum.GetValues(typeof(AcademicStatus.Status)).Cast<AcademicStatus.Status>().ToList();
         DataChanged = false;
+        AssessmentSelected = false;
     }
     
     [RelayCommand]

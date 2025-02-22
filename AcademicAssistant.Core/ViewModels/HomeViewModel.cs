@@ -87,5 +87,6 @@ public partial class HomeViewModel: ObservableRecipient
         {
             NotificationIcon = "bell_notification.png";
         }
+        TermSelected = false;
     }
 }

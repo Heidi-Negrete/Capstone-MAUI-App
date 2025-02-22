@@ -34,6 +34,7 @@ public partial class TermDetailsViewModel : ObservableRecipient
         Term = await _repository.GetTermById(TermId);
         Courses = new ObservableCollection<Course>(await _repository.GetCoursesByTermId(TermId));
         TermDataChanged = false;
+        CourseSelected = false;
     }
     
     [RelayCommand]
