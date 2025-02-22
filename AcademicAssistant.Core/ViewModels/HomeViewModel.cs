@@ -25,12 +25,11 @@ public partial class HomeViewModel: ObservableRecipient
         }
     }
 
-    [ObservableProperty] private bool _termSelected;
+    [ObservableProperty] private bool _termSelected = false;
     
     [ObservableProperty] private ObservableCollection<Notification> _notifications;
-    
-    [ObservableProperty]
-    private Term _selectedTerm;
+
+    [ObservableProperty] private Term _selectedTerm;
 
     [ObservableProperty]
     private ObservableCollection<Term> _terms;
@@ -39,8 +38,6 @@ public partial class HomeViewModel: ObservableRecipient
     {
         _repository = repository;
         _notificationManager = notificationManager;
-        LoadData();
-        TermSelected = false;
     }
 
     [RelayCommand]

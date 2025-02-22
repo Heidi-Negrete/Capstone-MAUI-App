@@ -23,7 +23,6 @@ public partial class CourseDetailsViewModel : ObservableRecipient
     
     [ObservableProperty] private bool _dataChanged = false; // Used to indicate whether 'Save' button should be shown
     [ObservableProperty] private bool _changesValid = true; // Used to indicate whether 'Save' button should be enabled
-    private bool PageLoaded = false;
     
     public CourseDetailsViewModel(IRepository repository)
     {
@@ -36,7 +35,6 @@ public partial class CourseDetailsViewModel : ObservableRecipient
         Assessments = new ObservableCollection<Assessment>(await _repository.GetAssessmentsByCourseId(CourseId));
         CourseStatusList = Enum.GetValues(typeof(AcademicStatus.Status)).Cast<AcademicStatus.Status>().ToList();
         DataChanged = false;
-        PageLoaded = true;
     }
     
     [RelayCommand]
@@ -113,7 +111,6 @@ public partial class CourseDetailsViewModel : ObservableRecipient
     
     private async Task ValidateData()
     {
-        if (!PageLoaded) return;
         if (Course.StartDate > Course.EndDate)
         {
             ChangesValid = false;

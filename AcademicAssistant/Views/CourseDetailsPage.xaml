@@ -92,7 +92,13 @@
                 </HorizontalStackLayout>
                 <HorizontalStackLayout HorizontalOptions="Center">
                     <Label Text="Notifications: " FontSize="16" VerticalOptions="Center"></Label>
-                    <Switch IsToggled="{Binding Course.NotificationEnabled}"></Switch>
+                    <Switch IsToggled="{Binding Course.NotificationEnabled}">
+                        <Switch.Behaviors>
+                            <tk:EventToCommandBehavior
+                                EventName="Toggled"
+                                Command="{Binding ConfirmDataChangedCommand}"/>
+                        </Switch.Behaviors>
+                    </Switch>
                 </HorizontalStackLayout>
             </VerticalStackLayout>
             
@@ -267,7 +273,14 @@
                     <HorizontalStackLayout Grid.Row="0">
                         <Label Text="Status: "  FontSize="24" Margin="5,0,0,5" HorizontalOptions="Center" VerticalOptions="Center"/>
                         <Label Text="{Binding Course.Status, Mode=OneWay, Converter={StaticResource StatusConverter}}" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center" Padding="10,0"/>
-                        <Picker HorizontalOptions="Center" FontSize="24" VerticalOptions="Center" ItemsSource="{Binding CourseStatusList}" SelectedItem="{Binding Course.Status}"></Picker>
+                        <Picker HorizontalOptions="Center" FontSize="24" VerticalOptions="Center" ItemsSource="{Binding CourseStatusList}" SelectedItem="{Binding Course.Status}">
+                            <Picker.Behaviors>
+                                <tk:EventToCommandBehavior
+                                    EventName="SelectedIndexChanged"
+                                    Command="{Binding ConfirmDataChangedCommand}"
+                                />
+                            </Picker.Behaviors>
+                        </Picker>
                     </HorizontalStackLayout>
                     
                     <Label Text="Notes:" Margin="5,5,5,5" FontSize="24"/>
@@ -276,7 +289,14 @@
                         <Editor
                             Text="{Binding Course.Notes}"
                             FontSize="16"
-                            Margin="10,10,10,10"/>
+                            Margin="10,10,10,10">
+                            <Editor.Behaviors>
+                                <tk:EventToCommandBehavior
+                                    EventName="TextChanged"
+                                    Command="{Binding ConfirmDataChangedCommand}"
+                                />
+                            </Editor.Behaviors>
+                        </Editor>
                     </Frame>
                     <Button Text="Share Notes" CommandParameter="{Binding Course.Notes}" Command="{Binding ShareNotesCommand}" Margin="0,10,0,0"></Button>
                     
