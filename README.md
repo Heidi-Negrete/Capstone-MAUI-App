@@ -5,7 +5,7 @@ The goal for this project is to develop a cross-platform mobile application usin
 The application helps students track their academic progress at WGU and manage their terms, courses, and assessments. Students will be able to customize their academic information, view instructor information, and manage notifications for all important dates.
 
 ## Visuals
-Check out the [wireframe](heidi_schwartz_wireframe.pdf) for the UI design.
+Check out the [wireframe](heidi_schwartz_wireframe_final.pdf) for the UI design.
 
 ## Installation
 For development: clone the repository.  
@@ -21,7 +21,10 @@ For the published app: download the latest release from the firebase link (WIP).
 - [SQL tite-net](https://github.com/praeclarum/sqlite-net)
 
 ## Usage and Documentation
-WIP
+#### Windows
+To delete a term or course: Select any item in a list (ensure that it is highlighted), and then right click and select delete.
+#### Android
+To delete a term or course: Swipe left on any item in a list and click on the trash icon to delete.
 
 ## Future Development
 - Documentation
