@@ -42,18 +42,18 @@ public partial class HomeViewModel: ObservableRecipient
     }
 
     [RelayCommand]
-    public void DeleteTerm()
+    public async Task DeleteTerm()
     {
         if (SelectedTerm == null) return;
-        _repository.DeleteTerm(SelectedTerm.Id);
+        await _repository.DeleteTerm(SelectedTerm.Id);
         Terms.Remove(SelectedTerm);
         SelectionChanged(null); // On Android if swipeview used to delete, selectionchanged does not fire
     }
     
     [RelayCommand]
-    public async void AddTerm()
+    public async Task AddTerm()
     {
-        _repository.AddTerm();
+        await _repository.AddTerm();
         Terms = new ObservableCollection<Term>(await _repository.GetTerms());
     }
 
@@ -68,7 +68,7 @@ public partial class HomeViewModel: ObservableRecipient
     }
 
     [RelayCommand]
-    public async void ViewSelectedTerm()
+    public async Task ViewSelectedTerm()
     {
         if (SelectedTerm == null) return;
         await Shell.Current.GoToAsync($"term?id={SelectedTerm.Id}");
@@ -90,7 +90,7 @@ public partial class HomeViewModel: ObservableRecipient
         return Notifications.ToList();
     }
 
-    public async void LoadData()
+    public async Task LoadData()
     {
         Student = await _repository.GetStudent();
         Terms = new ObservableCollection<Term>(await _repository.GetTerms());
