@@ -13,8 +13,9 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="75"/>
                 <RowDefinition Height="5"/>
-                <RowDefinition Height="650"/>
-                <RowDefinition Height= "48"/>
+                <RowDefinition Height="590"/>
+                <RowDefinition Height= "24"/>
+                <RowDefinition Height= "24"/>
 
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -178,7 +179,15 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
             
-            <VerticalStackLayout Grid.Row="3" Grid.ColumnSpan="3">
+            <SearchBar Grid.Row="3" Grid.ColumnSpan="3" Text="{Binding SearchText, Mode=OneWayToSource}" SearchCommand="{Binding SearchCommand}" Placeholder="Search..." SearchCommandParameter="{Binding Text, Source={RelativeSource Self}}">
+                <SearchBar.Behaviors>
+                    <toolkit:EventToCommandBehavior
+                        EventName="TextChanged"
+                        Command="{Binding SearchCommand}" />
+                </SearchBar.Behaviors>
+            </SearchBar>
+            <VerticalStackLayout Grid.Row="4" Grid.ColumnSpan="3">
+                
                 <HorizontalStackLayout VerticalOptions="End" HorizontalOptions="Center">
                     <Button  Text="Add Term" BackgroundColor="{StaticResource aaDarkAccent}" TextColor="{StaticResource aaBackground}" Margin="10, 10" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding AddTermCommand}"></Button>
                     <Button  IsVisible="{Binding TermSelected}" Text="View/Edit Term" BackgroundColor="{StaticResource aaDarkAccent}" TextColor="{StaticResource aaBackground}" Margin="10, 10" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding ViewSelectedTermCommand}"></Button>

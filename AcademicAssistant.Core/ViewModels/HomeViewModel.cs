@@ -24,6 +24,7 @@ public partial class HomeViewModel: ObservableRecipient
             SetProperty(ref _student, value);
         }
     }
+    [ObservableProperty] private string _searchText = "";
 
     [ObservableProperty] private bool _termSelected = false;
     
@@ -71,6 +72,17 @@ public partial class HomeViewModel: ObservableRecipient
     {
         if (SelectedTerm == null) return;
         await Shell.Current.GoToAsync($"term?id={SelectedTerm.Id}");
+    }
+
+    [RelayCommand]
+    public async Task Search()
+    {
+        if (SearchText == null || SearchText.Trim() == "")
+        {
+            Terms = new ObservableCollection<Term>(await _repository.GetTerms());
+            return;
+        }
+        Terms = new ObservableCollection<Term>(await _repository.Search(SearchText));
     }
     public List<Notification> NotificationsClicked()
     {

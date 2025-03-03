@@ -21,4 +21,5 @@ public interface IRepository
     public Task UpdateCourse(int id, Course course);
     public Task UpdateTerm(int id, Term term);
     public Task UpdateAssessment(int id, Assessment assessment);
+    public Task<List<Term>> Search(string searchtext);
 }

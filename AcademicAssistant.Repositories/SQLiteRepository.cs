@@ -272,5 +272,34 @@ namespace AcademicAssistant.Repositories
                 await _database.UpdateAsync(assessment);
             }
         }
+
+        public async Task<List<Term>> Search(string searchtext)
+        {
+            await Init();
+            if (string.IsNullOrEmpty(searchtext))
+            {
+                return await GetTerms();
+            }
+
+            var terms = await _database.Table<Term>().Where(t => t.Title.Contains(searchtext)).ToListAsync();
+            var courses = await _database.Table<Course>().Where(c => c.Title.Contains(searchtext)).ToListAsync();
+            var objectiveAssessments = await _database.Table<ObjectiveAssessment>().Where(a => a.Title.Contains(searchtext)).ToListAsync();
+            var performanceAssessments = await _database.Table<PerformanceAssessment>().Where(a => a.Title.Contains(searchtext)).ToListAsync();
+
+            var termIds = new HashSet<int>(terms.Select(t => t.Id));
+            termIds.UnionWith(courses.Select(c => c.TermId));
+            termIds.UnionWith(await Task.WhenAll(objectiveAssessments.Select(async a =>
+            {
+                var course = await _database.Table<Course>().Where(c => c.Id == a.CourseId).FirstOrDefaultAsync();
+                return course?.TermId ?? 0;
+            })));
+            termIds.UnionWith(await Task.WhenAll(performanceAssessments.Select(async a =>
+            {
+                var course = await _database.Table<Course>().Where(c => c.Id == a.CourseId).FirstOrDefaultAsync();
+                return course?.TermId ?? 0;
+            })));
+
+            return await _database.Table<Term>().Where(t => termIds.Contains(t.Id)).ToListAsync();
+        }
     }
 }

@@ -188,4 +188,9 @@ public class HardCodedRepository : IRepository
     {
         throw new NotImplementedException();
     }
+
+    public Task<List<Term>> Search(string searchtext)
+    {
+        throw new NotImplementedException();
+    }
 }
