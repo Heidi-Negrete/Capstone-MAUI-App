@@ -47,4 +47,7 @@ public partial class Course : ObservableValidator
     [Required]
     [ObservableProperty]
     private string _instructorPhone;
+    
+    [ObservableProperty]
+    private DateTime? _completedDate = null;
 }

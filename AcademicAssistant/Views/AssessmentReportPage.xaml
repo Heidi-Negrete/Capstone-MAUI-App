@@ -6,12 +6,15 @@
              xmlns:models="clr-namespace:AcademicAssistant.Repositories.Models;assembly=AcademicAssistant.Repositories"
              xmlns:tk="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:conv="clr-namespace:AcademicAssistant.Core.Converters;assembly=AcademicAssistant.Core"
-             x:DataType="vm:CourseReportViewModel"
-             x:Class="AcademicAssistant.Views.ReportPage">
-    
-    <ContentPage.Resources>
+             x:Class="AcademicAssistant.Views.AssessmentReportPage">
+        
+        <ContentPage.Resources>
         <conv:AcademicStatusConverter x:Key="StatusConverter"></conv:AcademicStatusConverter>
     </ContentPage.Resources>
+    
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding NavigateHomeCommand}"/>   
+    </Shell.BackButtonBehavior>
     
     <ContentPage.Content>
         
@@ -41,13 +44,11 @@
                     Margin="10, 0, 0, 0"/>
             </HorizontalStackLayout>
             
-            
-            
-            <!-- Course Completion -->
-                <Label x:Name="lblCourseTitle" Style="{DynamicResource Headline}" Text="Course Completion"/>
-                <ProgressBar Progress="{Binding CourseProgressPercentage}" ProgressColor="{DynamicResource aaAccentPositive}"/>
+            <!-- Assessment Completion -->
+                <Label x:Name="lblAssessmentTitle" Style="{DynamicResource Headline}" Text="Assessment Completion"/>
+                <ProgressBar Progress="{Binding AssessmentProgressPercentage}" ProgressColor="{DynamicResource aaAccentPositive}"/>
                 <Label
-                    x:Name="lblCourseProgress"
+                    x:Name="lblAssessmentProgress"
                     Padding="10, 0, 0, 0"
                     Margin="0, 0, 0, 20"
                     VerticalOptions="Start"
@@ -55,23 +56,25 @@
                     FontSize="16"
                     TextColor="{StaticResource aaFontAlt}">
                     <Label.Text>
-                        <MultiBinding StringFormat="{}{0}/{1} Courses Completed">
-                            <Binding Path="CompletedCourses" />
-                            <Binding Path="TotalCourses" />
+                        <MultiBinding StringFormat="{}{0}/{1} Assessments Completed">
+                            <Binding Path="CompletedAssessments" />
+                            <Binding Path="TotalAssessments" />
                         </MultiBinding>
                     </Label.Text>
                 </Label>
             
+            
             <BoxView Color="{DynamicResource aaDarkAccent}" HeightRequest="12"/>
             
-            <!-- Course List -->
+            
+            <!-- Assessment List -->
             <CollectionView
-                                x:Name="cvCourseReport"
+                                x:Name="cvAssessmentReport"
                                 Margin="0, 10, 0, 0"
                                 SelectionMode="None"
-                                ItemsSource="{Binding ListedCourses}" 
+                                ItemsSource="{Binding ListedAssessments}" 
                                 IsEnabled="True"
-                                EmptyView="No courses Found."
+                                EmptyView="No assessments Found."
                                 >
                                 
                     <CollectionView.ItemTemplate>
@@ -93,13 +96,13 @@
                             <Image Grid.Column="0"
                                     Grid.Row="0"
                                     Grid.RowSpan="2"
-                                    Source="course.png"
+                                    Source="assessment.png"
                                    VerticalOptions="Center"
                                     Margin="10,0,10,0"
                                     ></Image>
                             <Label Grid.Column="1"
                                    Grid.Row="0"
-                                   x:DataType="models:Course"
+                                   x:DataType="models:Assessment"
                                    Text="{Binding Title}"
                                    Padding="8, 0"
                                    VerticalOptions="End"
@@ -108,7 +111,7 @@
                                    FontSize="24"/>
                             <Label Grid.Column="2"
                                    Grid.Row="0"
-                                   x:DataType="models:Course"
+                                   x:DataType="models:Assessment"
                                    Text="{Binding Status, Mode=OneWay, Converter={StaticResource StatusConverter}}"
                                    VerticalOptions="Center"
                                    HorizontalOptions="End"
@@ -123,19 +126,14 @@
                                        FontSize="16"
                                        Padding="0,0,5, 0"
                                        TextColor="{StaticResource aaFontAlt}"
-                                       x:DataType="models:Course"
+                                       x:DataType="models:Assessment"
                                        Text="{Binding CompletedDate, StringFormat='{0:MM/dd/yyyy}'}"/>
                         </Grid>
-                        
-                        
-                        
-                        
                     </DataTemplate>
-                        
                 </CollectionView.ItemTemplate>
             </CollectionView>
             
-            
         </VerticalStackLayout>
+        
     </ContentPage.Content>
 </ContentPage>

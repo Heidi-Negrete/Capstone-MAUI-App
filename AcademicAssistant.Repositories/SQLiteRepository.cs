@@ -13,10 +13,10 @@ namespace AcademicAssistant.Repositories
         public SQLiteRepository()
         {
             // Uncomment to delete and recreate the database on startup
-            // if (File.Exists(Constants.DatabasePath))
-            // {
-            //     File.Delete(Constants.DatabasePath);
-            // }
+             //if (File.Exists(Constants.DatabasePath))
+             //{
+             //    File.Delete(Constants.DatabasePath);
+             //}
         }
 
         private async Task Init()
@@ -48,7 +48,8 @@ namespace AcademicAssistant.Repositories
             if (terms.Count == 0)
             {
                 _studentId = (await GetStudent()).Id;
-                await SeedData();
+                // Uncomment to seed test data
+                //await SeedData();
             }
         }
 
@@ -252,6 +253,14 @@ namespace AcademicAssistant.Repositories
                 course.NotificationEnabled = updatedCourse.NotificationEnabled;
                 course.EndDate = updatedCourse.EndDate;
                 course.StartDate = updatedCourse.StartDate;
+                if (course.Status == AcademicStatus.Status.Completed)
+                {
+                    course.CompletedDate = DateTime.Now;
+                }
+                else
+                {
+                    course.CompletedDate = null;
+                }
                 await _database.UpdateAsync(course);
             }
         }
@@ -267,6 +276,14 @@ namespace AcademicAssistant.Repositories
                 assessment.StartDate = updatedAssessment.StartDate;
                 assessment.NotificationEnabled = updatedAssessment.NotificationEnabled;
                 assessment.Status = updatedAssessment.Status;
+                if (assessment.Status == AcademicStatus.Status.Completed)
+                {
+                    assessment.CompletedDate = DateTime.Now;
+                }
+                else
+                {
+                    assessment.CompletedDate = null;
+                }
                 assessment.EndDate = updatedAssessment.EndDate;
                 assessment.StartDate = updatedAssessment.StartDate;
                 await _database.UpdateAsync(assessment);

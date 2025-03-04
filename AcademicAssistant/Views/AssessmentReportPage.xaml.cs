@@ -8,10 +8,10 @@ using AcademicAssistant.Core.ViewModels;
 namespace AcademicAssistant.Views;
 
 [QueryProperty(nameof(Toggled), "toggle")]
-public partial class ReportPage : ContentPage
+public partial class AssessmentReportPage : ContentPage
 {
-    private readonly CourseReportViewModel _viewModel;
-    private bool toggled = true;
+    private readonly AssessmentReportViewModel _viewModel;
+    private bool toggled = false;
 
     public bool Toggled
     {
@@ -22,7 +22,7 @@ public partial class ReportPage : ContentPage
         }
     }
     
-    public ReportPage(CourseReportViewModel viewModel)
+    public AssessmentReportPage(AssessmentReportViewModel viewModel)
     {
         InitializeComponent();
         _viewModel = viewModel;

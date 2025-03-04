@@ -34,4 +34,7 @@ public partial class Assessment : ObservableValidator
     
     [ObservableProperty]
     private string _about;
+    
+    [ObservableProperty]
+    private DateTime? _completedDate = null;
 }

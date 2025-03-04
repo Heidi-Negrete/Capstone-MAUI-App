@@ -11,5 +11,6 @@ public partial class AppShell : Shell
         Routing.RegisterRoute("term", typeof(TermDetailsPage));
         Routing.RegisterRoute("course", typeof(CourseDetailsPage));
         Routing.RegisterRoute("assessment", typeof(AssessmentDetailsPage));
+        Routing.RegisterRoute("assessmentreport", typeof(AssessmentReportPage));
     }
 }
