@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:AcademicAssistant.Core.ViewModels;assembly=AcademicAssistant.Core"
+             x:DataType="vm:ReportViewModel"
+             x:Class="AcademicAssistant.Views.ReportPage">
+    <ContentPage.Content>
+        <VerticalStackLayout>
+            <HorizontalStackLayout>
+                <Image
+                       Source="owl.png"
+                       HeightRequest="50"
+                       WidthRequest="50"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+            
+            <!-- Course Completion -->
+            <Label Style="{DynamicResource Headline}" Text="Course Completion"/>
+            <ProgressBar Progress="{Binding CourseProgressPercentage}" ProgressColor="{DynamicResource aaAccentPositive}"/>
+            <Label
+                Padding="10, 0, 0, 0"
+                Margin="0, 0, 0, 20"
+                VerticalOptions="Start"
+                HorizontalOptions="Start"
+                FontSize="16"
+                TextColor="{StaticResource aaFontAlt}">
+                <Label.Text>
+                    <MultiBinding StringFormat="{}{0}/{1} Courses Completed">
+                        <Binding Path="CompletedCourses" />
+                        <Binding Path="TotalCourses" />
+                    </MultiBinding>
+                </Label.Text>
+            </Label>
+            
+            
+            
+            <!-- Assessment Completion -->
+            <Label Style="{DynamicResource Headline}" Text="Assessment Completion"/>
+            <ProgressBar Progress="{Binding AssessmentProgressPercentage}" ProgressColor="{DynamicResource aaAccentPositive}"/>
+            <Label
+                Margin="0,20,0,10"
+                Padding="10, 0, 0, 0"
+                VerticalOptions="Start"
+                HorizontalOptions="Start"
+                FontSize="16"
+                TextColor="{StaticResource aaFontAlt}">
+                <Label.Text>
+                    <MultiBinding StringFormat="{}{0}/{1} Assessments Completed">
+                        <Binding Path="CompletedAssessments" />
+                        <Binding Path="TotalAssessments" />
+                    </MultiBinding>
+                </Label.Text>
+            </Label>
+            
+            <BoxView Color="{DynamicResource aaDarkAccent}" HeightRequest="12"/>
+            
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>

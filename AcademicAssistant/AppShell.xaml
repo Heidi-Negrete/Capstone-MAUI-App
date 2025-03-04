@@ -25,6 +25,15 @@
                 Route="settings"/>
         </Tab>
     </FlyoutItem>
+    
+    <FlyoutItem Title="Progress"
+                Icon="course.png">
+        <Tab>
+            <ShellContent
+                ContentTemplate="{DataTemplate views:ReportPage}"
+                Route="progress"/>
+        </Tab>
+    </FlyoutItem>
 
     <!--- TitleView text is NOT displayed, only colored bar.  -->
     <Shell.TitleView>

@@ -36,6 +36,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<TermDetailsPage>();
         builder.Services.AddSingleton<CourseDetailsPage>();
         builder.Services.AddSingleton<AssessmentDetailsPage>();
+        builder.Services.AddSingleton<ReportPage>();
         
         // ViewModels
         builder.Services.AddSingleton<HomeViewModel>();
@@ -43,6 +44,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<TermDetailsViewModel>();
         builder.Services.AddSingleton<CourseDetailsViewModel>();
         builder.Services.AddSingleton<AssessmentDetailsViewModel>();
+        builder.Services.AddSingleton<ReportViewModel>();
 
         // Notification Manager
         builder.Services.AddSingleton<NotificationManager>();
