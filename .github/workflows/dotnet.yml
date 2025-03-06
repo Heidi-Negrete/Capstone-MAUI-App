@@ -27,8 +27,9 @@ jobs:
       - name: Build
         run: dotnet build AcademicAssistant/AcademicAssistant.csproj -c:Release -f net8.0-android /p:AndroidSigningKeyStore=myapp.keystore /p:AndroidSigningKeyAlias=ghactionskey /p:AndroidSigningKeyPass="${{ secrets.KEYSTORE_PASSWORD }}" /p:AndroidSigningStorePass="${{ secrets.KEYSTORE_PASSWORD_ALIAS }}" --no-restore # may need to correct to -c Release
       - name: Upload a Build Artifact # Uploading a build artifact to the action run. I might want to do something different.
-        uses: actions/upload-artifact@v3.1.0
+        uses: actions/upload-artifact@v4
         with:
+          name: build-output
           path: |
             ./**/*.aab
             ./**/*.apk
