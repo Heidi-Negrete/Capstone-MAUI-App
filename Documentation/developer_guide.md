@@ -1,10 +1,10 @@
 ﻿# Developer Guide
-This application is built with C# using the .NET MAUI framework. The project is setup to implement the MVVM (Models, View, View-Models) design pattern.
+This application is built with C# using the .NET MAUI framework. The project is set up to implement the MVVM (Models, View, View-Models) design pattern.
 
 ## Prerequisites
 - [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 - [Visual Studio 2022](https://visualstudio.microsoft.com/vs/) or [JetBrains Rider](https://www.jetbrains.com/rider/)
-- [Android Emulator](https://learn.microsoft.com/en-us/visualstudio/emulator/overview?view=vs-2022) or [iOS Simulator](https://learn.microsoft.com/en-us/xamarin/ios/get-started/installation/device-simulator?tabs=macos) if you wish to test for mobile devices, otherwise Windows 11.
+- [Android Emulator](https://learn.microsoft.com/en-us/visualstudio/emulator/overview?view=vs-2022) if you wish to test for android devices, otherwise Windows 11.
 
 ## Setup
 1. Clone the repository to your local machine.
@@ -16,8 +16,7 @@ This application is built with C# using the .NET MAUI framework. The project is 
 The solution is split into four projects:  
 **AcademicAssistant**: The main application project that contains the main entry point and pages.  
 **AcademicAssistant.Core**: Contains the ViewModels, Services, and Converters, and business logic.  
-**AcademicAssistant.Repositories**: Contains the data access layer and models.  
-**AcademicAssistant.Tests**: Contains the unit tests for the application.  
+**AcademicAssistant.Repositories**: Contains the data access layer and models.   
 
 Here are some of the key files and directories for the project:
 - [AppShell.xaml](../AcademicAssistant/AppShell.xaml) The main shell of the application that defines the navigation structure.
