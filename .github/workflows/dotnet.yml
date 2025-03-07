@@ -41,9 +41,9 @@ jobs:
             ./**/*.apk
       - name: Publish build to Pages
         run: |
-            mv AcademicAssistant/bin/Release/net8.0-android/com.companyname.academicassistant-Signed.apk ./academicassistant.apk
+            mv ./AcademicAssistant/bin/Release/net8.0-android/com.companyname.academicassistant-Signed.apk ./academicassistant.apk
             touch index.html
             echo "<h1>EMC Academic Assistant</h1><p>Download the latest version of <a download="academic-assistant.apk" href='./academicassistant.apk'>EMC Academic Assistant</a>!</p>" > index.html
             git add -A
             git commit -am "Release build"
-            git push origin release
+            git push origin release --force
