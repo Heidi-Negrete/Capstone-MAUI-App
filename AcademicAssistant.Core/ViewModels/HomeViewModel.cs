@@ -47,6 +47,7 @@ public partial class HomeViewModel: ObservableRecipient
         if (SelectedTerm == null) return;
         await _repository.DeleteTerm(SelectedTerm.Id);
         Terms.Remove(SelectedTerm);
+        Terms = new ObservableCollection<Term>(Terms);
         SelectionChanged(null); // On Android if swipeview used to delete, selectionchanged does not fire
     }
     
