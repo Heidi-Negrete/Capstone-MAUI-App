@@ -32,7 +32,7 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "heidi@negrete.dev"
           git checkout -b release
-          dotnet build AcademicAssistant/AcademicAssistant.csproj -c:Release -f net8.0-android /p:AndroidSigningKeyStore=myapp.keystore /p:AndroidSigningKeyAlias=ghactionskey /p:AndroidSigningKeyPass="${{ secrets.KEYSTORE_PASSWORD }}" /p:AndroidSigningStorePass="${{ secrets.KEYSTORE_PASSWORD_ALIAS }}" --no-restore # may need to correct to -c Release
+          dotnet build AcademicAssistant/AcademicAssistant.csproj -c:Release -f net8.0-android /p:AndroidSigningKeyStore=myapp.keystore /p:AndroidSigningKeyAlias=ghactionskey /p:AndroidSigningKeyPass="${{ secrets.KEYSTORE_PASSWORD }}" /p:AndroidSigningStorePass="${{ secrets.KEYSTORE_PASSWORD_ALIAS }}" --no-restore
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4
         with:
@@ -44,5 +44,6 @@ jobs:
             mv ./**/*.apk ./academicassistant.apk
             touch index.html
             echo "<h1>EMC Academic Assistant</h1><p>Download the latest version of <a download="academic-assistant.apk" href='./academicassistant.apk'>EMC Academic Assistant</a>!</p>" > index.html
+            git add academicassistant.apk index.html
             git commit -am "Release build"
             git push origin release --force
