@@ -33,16 +33,16 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build-output
-          path: |
-            ./**/*.aab
+          path:
             ./**/*.apk
-      - name: Publish changes to release branch and GH Pages
+      - name: Publish build to release branch
         run: |
             git config --global user.name "GitHub Actions"
             git config --global user.email "heidi@negrete.dev"
             git checkout -b release
+            mv ./**/*.apk ./academicassistant.apk
             touch index.html
-            echo "<h1>EMC Academic Assistant</h1><p>Download the latest version of <a href='./build-output'>EMC Academic Assistant</a>!</p>" > index.html
+            echo "<h1>EMC Academic Assistant</h1><p>Download the latest version of <a download="academic-assistant.apk" href='./academicassistant.apk'>EMC Academic Assistant</a>!</p>" > index.html
             git add index.html
             git add ./**/*.aab
             git add ./**/*.apk
