@@ -10,6 +10,9 @@ jobs:
   build:
 
     runs-on: windows-latest
+    permissions: 
+        contents: write
+        pages: write
 
     steps:
       - uses: actions/checkout@v3
@@ -26,10 +29,22 @@ jobs:
         run: dotnet restore
       - name: Build
         run: dotnet build AcademicAssistant/AcademicAssistant.csproj -c:Release -f net8.0-android /p:AndroidSigningKeyStore=myapp.keystore /p:AndroidSigningKeyAlias=ghactionskey /p:AndroidSigningKeyPass="${{ secrets.KEYSTORE_PASSWORD }}" /p:AndroidSigningStorePass="${{ secrets.KEYSTORE_PASSWORD_ALIAS }}" --no-restore # may need to correct to -c Release
-      - name: Upload a Build Artifact # Uploading a build artifact to the action run. I might want to do something different.
+      - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4
         with:
           name: build-output
           path: |
             ./**/*.aab
             ./**/*.apk
+      - name: Publish changes to release branch and GH Pages
+        run: |
+            git config --global user.name "GitHub Actions"
+            git config --global user.email "heidi@negrete.dev"
+            git checkout -b release
+            touch index.html
+            echo "<h1>EMC Academic Assistant</h1><p>Download the latest version of <a href='./build-output'>EMC Academic Assistant</a>!</p>" > index.html
+            git add index.html
+            git add ./**/*.aab
+            git add ./**/*.apk
+            git commit -m "Release build"
+            git push origin release
