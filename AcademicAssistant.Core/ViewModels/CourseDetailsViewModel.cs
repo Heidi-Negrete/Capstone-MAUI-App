@@ -125,5 +125,13 @@ public partial class CourseDetailsViewModel : ObservableRecipient
             await Shell.Current.DisplayAlert("Invalid Dates", "Please ensure your start date is before your end date.", "OK");
             return;
         }
+        if (string.IsNullOrWhiteSpace(Course.Title.Trim()))
+        {
+            ChangesValid = false;
+        }
+        else
+        {
+            ChangesValid = true;
+        }
     }
 }

@@ -92,6 +92,7 @@ public partial class TermDetailsViewModel : ObservableRecipient
         }
         try
         {
+            Term.Title = Term.Title.Trim();
             await _repository.UpdateTerm(Term.Id, Term);
         }
         catch (Exception e)
@@ -123,6 +124,7 @@ public partial class TermDetailsViewModel : ObservableRecipient
     [RelayCommand]
     public async void ConfirmTermDataChanged()
     {
+        System.Diagnostics.Trace.WriteLine("Term data changed");
         TermDataChanged = true;
         await ValidateData();
     }
@@ -134,6 +136,14 @@ public partial class TermDetailsViewModel : ObservableRecipient
             ChangesValid = false;
             await Shell.Current.DisplayAlert("Invalid Dates", "Please ensure your start date is before your end date.", "OK");
             return;
+        }
+        if (string.IsNullOrWhiteSpace(Term.Title.Trim()))
+        {
+            ChangesValid = false;
+        }
+        else
+        {
+            ChangesValid = true;
         }
     }
 }

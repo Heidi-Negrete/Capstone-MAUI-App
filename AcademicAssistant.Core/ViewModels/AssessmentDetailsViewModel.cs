@@ -85,5 +85,13 @@ public partial class AssessmentDetailsViewModel : ObservableRecipient
             await Shell.Current.DisplayAlert("Invalid Dates", "Please ensure your start date is before your end date.", "OK");
             return;
         }
+        if (string.IsNullOrWhiteSpace(Assessment.Title.Trim()))
+        {
+            ChangesValid = false;
+        }
+        else
+        {
+            ChangesValid = true;
+        }
     }
 }
