@@ -10,26 +10,26 @@
 <ScrollView>
     <VerticalStackLayout Padding="0,0,0,20">
             <!-- Header -->
-            <HorizontalStackLayout HeightRequest="75">
+            <HorizontalStackLayout HeightRequest="75" HorizontalOptions="Center">
                 <Image
-                       Source="owl.png"
-                       HeightRequest="50"
-                       WidthRequest="50"
-                       HorizontalOptions="Start"
-                       VerticalOptions="Center"/>
+                    Margin="10,0"
+                    Source="owl.png"
+                    HeightRequest="50"
+                    WidthRequest="50"
+                    VerticalOptions="Center"
+                    />
                 <Label
-                    Margin="100,0,100,0"
+                    Margin="10,0"
+                    Padding="20,0"
                     Text="{Binding Student.Name}"
                     FontSize="24"
-                    HorizontalOptions="Start"
                     VerticalOptions="Center"/>
                 <ImageButton
-                    Margin="0,0,20,0"
+                    Margin="10,0"
                     Source="{Binding NotificationIcon}"
                     HeightRequest="48"
                     WidthRequest="48"
                     VerticalOptions="Center"
-                    HorizontalOptions="End"
                     Clicked="NotificationButton_OnClicked"
                 />
             </HorizontalStackLayout>

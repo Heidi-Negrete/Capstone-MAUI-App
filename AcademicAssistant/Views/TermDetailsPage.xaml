@@ -18,21 +18,22 @@
     </Shell.BackButtonBehavior>
     <ScrollView>
     <VerticalStackLayout Margin="0,0,0,20">
+        
+        
         <!-- Header -->
         <HorizontalStackLayout>
         <Image
-                   Source="owl.png"
-                   HeightRequest="50"
-                   WidthRequest="50"
-                   HorizontalOptions="Start"
-                   VerticalOptions="Center"/>
-            <Entry
-                x:Name="entryTitle"
-                Margin="50,0,50,0"
-                Text="{Binding Term.Title, FallbackValue='Term not found'}"
-                FontSize="24"
-                HorizontalOptions="Start"
-                VerticalOptions="Center">
+            Margin="10,0"
+            Source="owl.png"
+            HeightRequest="50"
+            WidthRequest="50"/>
+        <Entry
+            Margin="10,0"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            x:Name="entryTitle"
+            Text="{Binding Term.Title, FallbackValue='Term not found'}"
+            FontSize="24">
                 <Entry.Behaviors>
                     <tk:TextValidationBehavior
                         MinimumLength="1"
@@ -46,10 +47,7 @@
                         />
                 </Entry.Behaviors>
             </Entry>
-            <VerticalStackLayout 
-                Padding="0,0,0,10"
-                VerticalOptions="Center"
-                HorizontalOptions="End">
+            <VerticalStackLayout Margin="10,0">
                 <HorizontalStackLayout>
                     <Label Text="Start Date: " FontSize="16" VerticalOptions="Center"></Label>
                     <DatePicker x:Name="dpStart" Date="{Binding Term.StartDate}">
