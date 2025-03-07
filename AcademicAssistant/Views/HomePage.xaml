@@ -7,55 +7,39 @@
              x:DataType="vm:HomeViewModel"
              x:Class="AcademicAssistant.Views.HomePage"
              Title="Home">
-
-    <VerticalStackLayout>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="75"/>
-                <RowDefinition Height="5"/>
-                <RowDefinition Height="580"/>
-                <RowDefinition Height= "48"/>
-                <RowDefinition Height= "48"/>
-
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
+<ScrollView>
+    <VerticalStackLayout Padding="0,0,0,20">
             <!-- Header -->
-            <Image Grid.Row="0"
-                   Grid.Column="0"
-                   Source="owl.png"
-                   HeightRequest="50"
-                   WidthRequest="50"
-                   HorizontalOptions="Start"
-                   VerticalOptions="Center"/>
-            <Label
-                Grid.Row="0"
-                Grid.Column="0"
-                Margin="100,0,100,0"
-                Text="{Binding Student.Name}"
-                FontSize="24"
-                HorizontalOptions="Start"
-                VerticalOptions="Center"/>
-            <ImageButton
-                Grid.Row="0"
-                Grid.Column="0"
-                Margin="0,0,20,0"
-                Source="{Binding NotificationIcon}"
-                HeightRequest="48"
-                WidthRequest="48"
-                VerticalOptions="Center"
-                HorizontalOptions="End"
-                Clicked="NotificationButton_OnClicked"
+            <HorizontalStackLayout HeightRequest="75">
+                <Image
+                       Source="owl.png"
+                       HeightRequest="50"
+                       WidthRequest="50"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"/>
+                <Label
+                    Margin="100,0,100,0"
+                    Text="{Binding Student.Name}"
+                    FontSize="24"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"/>
+                <ImageButton
+                    Margin="0,0,20,0"
+                    Source="{Binding NotificationIcon}"
+                    HeightRequest="48"
+                    WidthRequest="48"
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"
+                    Clicked="NotificationButton_OnClicked"
                 />
+            </HorizontalStackLayout>
+            
 
-            <BoxView Grid.Row="1"
-                     Grid.Column="0"
+            <BoxView
                      Color="{StaticResource aaLightAccent}"/>
 
 
-                <CollectionView Grid.Row="2" Grid.Column="0"
+                <CollectionView
                                 x:Name="lvTerms"
                                 SelectionMode="Single"
                                 ItemsSource="{Binding Terms}" 
@@ -64,6 +48,7 @@
                                 EmptyView="Add a term to get started!"
                                 SelectionChangedCommand="{Binding SelectionChangedCommand}" 
                                 SelectionChangedCommandParameter="{Binding Path=SelectedItem, Source={RelativeSource Self}}"
+                                MaximumHeightRequest="550"
                                 >
                                 
                     <CollectionView.ItemTemplate>
@@ -179,14 +164,14 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
             
-            <SearchBar Margin="0,20,0,0" Grid.Row="3" Grid.ColumnSpan="3" Text="{Binding SearchText, Mode=OneWayToSource}" SearchCommand="{Binding SearchCommand}" Placeholder="Search..." SearchCommandParameter="{Binding Text, Source={RelativeSource Self}}">
+            <SearchBar HeightRequest="48" Margin="0,20,0,0" Grid.Row="3" Grid.ColumnSpan="3" Text="{Binding SearchText, Mode=OneWayToSource}" SearchCommand="{Binding SearchCommand}" Placeholder="Search..." SearchCommandParameter="{Binding Text, Source={RelativeSource Self}}">
                 <SearchBar.Behaviors>
                     <toolkit:EventToCommandBehavior
                         EventName="TextChanged"
                         Command="{Binding SearchCommand}" />
                 </SearchBar.Behaviors>
             </SearchBar>
-            <VerticalStackLayout Grid.Row="4" Grid.ColumnSpan="3">
+            <VerticalStackLayout Grid.Row="4" Grid.ColumnSpan="3" HeightRequest="48">
                 
                 <HorizontalStackLayout VerticalOptions="End" HorizontalOptions="Center" Margin="0,5,0,0">
                     <Button  Text="Add Term" BackgroundColor="{StaticResource aaDarkAccent}" TextColor="{StaticResource aaBackground}" Margin="10, 10" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding AddTermCommand}"></Button>
@@ -194,10 +179,7 @@
                 </HorizontalStackLayout>
                 
             </VerticalStackLayout>
-
-        </Grid>
-        
-        
     </VerticalStackLayout>
+    </ScrollView>
 
 </ContentPage>
