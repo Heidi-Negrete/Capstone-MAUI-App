@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademicAssistant.Core", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademicAssistant.Repositories", "AcademicAssistant.Repositories\AcademicAssistant.Repositories.csproj", "{FDBB35B2-64BB-4C79-9D54-B718D229E224}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademicAssistant.Tests", "AcademicAssistant.Tests\AcademicAssistant.Tests.csproj", "{9C084DD6-B3DC-4E34-95F9-2BC021777E05}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{FDBB35B2-64BB-4C79-9D54-B718D229E224}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDBB35B2-64BB-4C79-9D54-B718D229E224}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDBB35B2-64BB-4C79-9D54-B718D229E224}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C084DD6-B3DC-4E34-95F9-2BC021777E05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C084DD6-B3DC-4E34-95F9-2BC021777E05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C084DD6-B3DC-4E34-95F9-2BC021777E05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C084DD6-B3DC-4E34-95F9-2BC021777E05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
